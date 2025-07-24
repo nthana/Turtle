@@ -22,8 +22,13 @@ public class Forward : Command
 
         endTime = distant / turtle.speed;
         startPosition = turtle.position;
-        var direction = turtle.direction;
-        displacement = new Vector2(MathF.Cos(direction), MathF.Sin(direction)) * distant;
+        var radian = ToRadian(turtle.direction);
+        displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant;
+    }
+
+    private float ToRadian(float direction)
+    {
+        return direction * MathF.PI / 180;
     }
 
     public bool Act(float deltaTime, BufferedGraphics myBuffer)
@@ -32,6 +37,7 @@ public class Forward : Command
         if(accumTime > endTime)
             accumTime = endTime;
 
+        // todo: recheck rounding error
         var position = startPosition + displacement * (accumTime/endTime);
         var pen = new Pen(turtle.pencolor, 5);
         myBuffer.Graphics.DrawLine(pen, (PointF)turtle.position, (PointF)position);

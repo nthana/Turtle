@@ -83,7 +83,7 @@ namespace TurtleTest
 
             buffer.Graphics.Clear(Color.LightGray);
             var pen = new Pen(Color.Blue, 15);
-            buffer.Graphics.DrawEllipse(pen, this.DisplayRectangle);
+            //buffer.Graphics.DrawEllipse(pen, this.DisplayRectangle);
 
             return buffer;
         }
