@@ -4,6 +4,23 @@ namespace TurtleTest
 {
     internal static class Program
     {
+        static Form1 CreateUI()
+        {
+            Form1? form = null;
+            var thread = new Thread(() => {
+                //Thread.CurrentThread.IsBackground = false;
+                var form1 = new Form1();
+                form = form1;
+                Application.Run(form1);
+            });
+            thread.Start();
+
+            while (form == null)
+                Thread.Sleep(50);
+
+            form!.WaitForStart();
+            return form;
+        }
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -19,21 +36,10 @@ namespace TurtleTest
 
             // https://stackoverflow.com/questions/363377/how-do-i-run-a-simple-bit-of-code-in-a-new-thread 
             // is background คือจะถูก kill ถ้า thread อื่นจบการทำงานหมด
-            Form1? form = null;
-            var thread = new Thread(() => {
-                //Thread.CurrentThread.IsBackground = false;
-                var form1 = new Form1();
-                form = form1;
-                Application.Run(form1);
-            });
-            thread.Start();
 
-            while (form == null)
-                Thread.Sleep(100);
-
-            form!.WaitForStart();
-
-            //Application.Run(new Form1());
+            Form1 form = CreateUI();
+            form.QueueAndWait(new Forward(new PointF(100, 100)));
+            form.QueueAndWait(new Forward(new PointF(200, 200)));
             DrawLine();
         }
 

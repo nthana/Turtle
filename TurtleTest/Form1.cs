@@ -7,15 +7,34 @@ namespace TurtleTest
         private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
         private Stopwatch watch = new Stopwatch();
 
-        private PointF position = new PointF(100, 100);
-        private PointF v = new PointF(80, 30);
-
         private ManualResetEvent startedEvent = new ManualResetEvent(false);
+        private ManualResetEvent finishCommandEvent = new ManualResetEvent(false);
+        private Command? command = null;
         private BufferedGraphics myBuffer;
         public void WaitForStart()
         {
             startedEvent.WaitOne();
         }
+
+        // called from other thread
+        public void QueueAndWait(Command command)
+        {
+            if (this.command != null)
+                throw new Exception("reassign command while not finished old command.");
+            this.command = command;
+            finishCommandEvent.WaitOne();
+        }
+
+        // called from this thread (UI Thread)
+        private void finishedCommand()
+        {
+            this.command = null; // reference assignment is atomic in C#
+            finishCommandEvent.Set();
+        }
+        /*private Command? CheckCommand()
+        {
+            return command;
+        }*/
         public Form1()
         {
             InitializeComponent();
@@ -37,14 +56,15 @@ namespace TurtleTest
         {
             Debug.WriteLine(watch.ElapsedMilliseconds);
 
-            PointF pos2 = position + (SizeF)((System.Numerics.Vector2)v * (float)watch.Elapsed.TotalSeconds);
+            float deltaTime = (float)watch.Elapsed.TotalSeconds;
             watch.Restart();
 
-            var pen = new Pen(Color.Red, 5);
-            myBuffer.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-            myBuffer.Graphics.DrawLine(pen, position, pos2);
-
-            position = pos2;
+            if (command != null)
+            {
+                command.Act(deltaTime, myBuffer);
+                if (command.IsFinished())
+                    finishedCommand();
+            }
 
             Refresh();
         }
@@ -59,9 +79,12 @@ namespace TurtleTest
             buffer = currentContext.Allocate(this.CreateGraphics(),
                this.DisplayRectangle);
 
+            buffer.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+
             buffer.Graphics.Clear(Color.LightGray);
             var pen = new Pen(Color.Blue, 15);
             buffer.Graphics.DrawEllipse(pen, this.DisplayRectangle);
+
             return buffer;
         }
 
