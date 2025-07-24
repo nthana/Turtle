@@ -8,7 +8,7 @@ namespace TurtleTest
         private Stopwatch watch = new Stopwatch();
 
         private ManualResetEvent startedEvent = new ManualResetEvent(false);
-        private ManualResetEvent finishCommandEvent = new ManualResetEvent(false);
+        private AutoResetEvent finishCommandEvent = new AutoResetEvent(false);
         private Command? command = null;
         private BufferedGraphics myBuffer;
         public void WaitForStart()

@@ -41,16 +41,3 @@ public class Turtle
         form.QueueAndWait(new Forward(new PointF(200, 300)));
     }
 }
-
-public static class MainTurtle
-{
-    private static void CheckInit()
-    {
-
-    }
-
-    public static void fd()
-    {
-
-    }
-}

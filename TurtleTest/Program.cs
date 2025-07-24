@@ -41,6 +41,13 @@ namespace TurtleTest
             form.QueueAndWait(new Forward(new PointF(100, 100)));
             form.QueueAndWait(new Forward(new PointF(200, 200)));
             DrawLine();
+
+            Thread.CurrentThread.IsBackground = true;
+
+            var t1 = new Turtle();
+            t1.fd();
+
+            TurtleOne.fd();
         }
 
         static void DrawLine()
