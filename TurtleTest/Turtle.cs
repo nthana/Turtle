@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,11 @@ namespace TurtleTest;
 
 public class Turtle
 {
+    public Vector2 position { get; set; }
+    public float direction { get; set; }
+    public float speed { get; set; } = 100f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
+    public Color pencolor { get; set; } = Color.Black;
+
     private Form1 form;
     public Turtle(Form1 form)
     {
@@ -36,8 +42,8 @@ public class Turtle
         return form;
     }
 
-    public void fd()
+    public void fd(float distant)
     {
-        form.QueueAndWait(new Forward(new PointF(200, 300)));
+        form.QueueAndWait(new Forward(this, distant));
     }
 }

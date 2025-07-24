@@ -17,10 +17,10 @@ public static class TurtleOne
         turtle = new Turtle();
     }
 
-    public static void fd()
+    public static void fd(float distant)
     {
         CheckInit();
 
-        turtle!.fd();
+        turtle!.fd(distant);
     }
 }

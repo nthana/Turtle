@@ -37,22 +37,19 @@ namespace TurtleTest
             // https://stackoverflow.com/questions/363377/how-do-i-run-a-simple-bit-of-code-in-a-new-thread 
             // is background คือจะถูก kill ถ้า thread อื่นจบการทำงานหมด
 
-            Form1 form = CreateUI();
+/*            Form1 form = CreateUI();
             form.QueueAndWait(new Forward(new PointF(100, 100)));
-            form.QueueAndWait(new Forward(new PointF(200, 200)));
-            DrawLine();
+            form.QueueAndWait(new Forward(new PointF(200, 200)));*/
 
             Thread.CurrentThread.IsBackground = true;
 
             var t1 = new Turtle();
-            t1.fd();
+            t1.direction = 0.5f;
+            t1.fd(300);
+            t1.direction = 1f;
+            t1.fd(400);
 
-            TurtleOne.fd();
-        }
-
-        static void DrawLine()
-        {
-
+            //TurtleOne.fd();
         }
     }
 }
