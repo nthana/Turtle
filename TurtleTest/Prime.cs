@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ThanaNita.Turtles;
 
-public static class TurtleOne
+public static class Prime
 {
     public static Turtle t1 { get { CheckInit(); return turtle!; } }
     private static Turtle? turtle;
@@ -19,16 +19,16 @@ public static class TurtleOne
         turtle = new Turtle();
     }
 
-    public static float direction 
+    public static float Direction 
     { 
-        get { CheckInit(); return turtle!.direction; } 
-        set { CheckInit(); turtle!.direction = value; }
+        get { CheckInit(); return turtle!.Direction; } 
+        set { CheckInit(); turtle!.Direction = value; }
     }
 
-    public static void fd(float distant)
+    public static void Forward(float distant)
     {
         CheckInit();
 
-        turtle!.fd(distant);
+        turtle!.Forward(distant);
     }
 }

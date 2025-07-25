@@ -22,7 +22,7 @@ public class Forward : Command
 
         endTime = distant / turtle.speed;
         startPosition = turtle.position;
-        var radian = ToRadian(turtle.direction);
+        var radian = ToRadian(turtle.Direction);
         displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant;
     }
 

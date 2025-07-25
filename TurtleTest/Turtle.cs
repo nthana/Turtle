@@ -11,7 +11,7 @@ namespace ThanaNita.Turtles;
 public class Turtle
 {
     public Vector2 position { get; set; }
-    public float direction { get; set; }    // todo: change unit to degree
+    public float Direction { get; set; }    // todo: change unit to degree
     public float speed { get; set; } = 100f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
     public Color pencolor { get; set; } = Color.Black;
 
@@ -43,7 +43,7 @@ public class Turtle
         return form;
     }
 
-    public void fd(float distant)
+    public void Forward(float distant)
     {
         form.QueueAndWait(new Forward(this, distant));
     }

@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Numerics;
-using static ThanaNita.Turtles.TurtleOne;
+using ThanaNita.Turtles;
+//using static ThanaNita.Turtles.Prime;
 
 
 namespace TurtleTest;
@@ -14,19 +15,19 @@ internal static class Program
         // see https://aka.ms/applicationconfiguration.
         ApplicationConfiguration.Initialize();
 
-
+        var t1 = new Turtle();
 
         t1.position = new Vector2(300, 100);
         t1.pencolor = Color.Red;
-        direction = 60f;
-        fd(300);
+        t1.Direction = 60f;
+        t1.Forward(300);
 
         t1.pencolor = Color.Blue;
-        direction = 180f;
-        fd(300);
+        t1.Direction = 180f;
+        t1.Forward(300);
 
         t1.pencolor = Color.Green;
-        direction = -60f;
-        fd(300);
+        t1.Direction = -60f;
+        t1.Forward(300);
     }
 }
