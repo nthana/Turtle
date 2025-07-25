@@ -102,8 +102,9 @@ public partial class Display : Form
         myBuffer.Render(g);
     }
 
-    private void Form1_Load(object sender, EventArgs e)
-    {
 
+    private void Display_FormClosed(object sender, FormClosedEventArgs e)
+    {
+        Environment.Exit(0);
     }
 }

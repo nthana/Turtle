@@ -20,8 +20,8 @@ public class Forward : Command
     {
         this.turtle = turtle;
 
-        endTime = distant / turtle.speed;
-        startPosition = turtle.position;
+        endTime = distant / turtle.Speed;
+        startPosition = turtle.Position;
         var radian = ToRadian(turtle.Direction);
         displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant;
     }
@@ -39,10 +39,12 @@ public class Forward : Command
 
         // todo: recheck rounding error
         var position = startPosition + displacement * (accumTime/endTime);
-        var pen = new Pen(turtle.pencolor, 5);
-        myBuffer.Graphics.DrawLine(pen, (PointF)turtle.position, (PointF)position);
+        var pen = new Pen(turtle.PenColor, 5);
+        pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+        pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
+        myBuffer.Graphics.DrawLine(pen, (PointF)turtle.Position, (PointF)position);
 
-        turtle.position = position;
+        turtle.Position = position;
 
         return IsFinished();
     }

@@ -10,10 +10,10 @@ namespace ThanaNita.Turtles;
 
 public class Turtle
 {
-    public Vector2 position { get; set; }
+    public Vector2 Position { get; set; }
     public float Direction { get; set; }    // todo: change unit to degree
-    public float speed { get; set; } = 100f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
-    public Color pencolor { get; set; } = Color.Black;
+    public float Speed { get; set; } = 100f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
+    public Color PenColor { get; set; } = Color.Black;
 
     private Display form;
     public Turtle(Display form)

@@ -30,14 +30,13 @@ partial class Display
     {
         SuspendLayout();
         // 
-        // Form1
+        // Display
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(800, 450);
-        Name = "Form1";
-        Text = "Form1";
-        Load += Form1_Load;
+        Name = "Display";
+        FormClosed += Display_FormClosed;
         Paint += Form1_Paint;
         KeyDown += Form1_KeyDown;
         ResumeLayout(false);
