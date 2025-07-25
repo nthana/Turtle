@@ -1,8 +1,8 @@
 using System.Diagnostics;
-using ThanaNita.Turtles;
-namespace TurtleTest;
 
-public partial class Form1 : Form
+namespace ThanaNita.Turtles;
+
+public partial class Display : Form
 {
     private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
     private Stopwatch watch = new Stopwatch();
@@ -35,14 +35,14 @@ public partial class Form1 : Form
     {
         return command;
     }*/
-    public Form1()
+    public Display()
     {
         InitializeComponent();
 
         Debug.WriteLine(DoubleBuffered);
         this.DoubleBuffered = true;
 
-        timer.Interval = 1000/60;
+        timer.Interval = 1000 / 60;
         timer.Tick += Timer_Tick;
         timer.Enabled = true;
         watch.Start();
@@ -100,5 +100,10 @@ public partial class Form1 : Form
     {
         Graphics g = e.Graphics;
         myBuffer.Render(g);
+    }
+
+    private void Form1_Load(object sender, EventArgs e)
+    {
+
     }
 }

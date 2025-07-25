@@ -15,8 +15,8 @@ public class Turtle
     public float speed { get; set; } = 100f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
     public Color pencolor { get; set; } = Color.Black;
 
-    private Form1 form;
-    public Turtle(Form1 form)
+    private Display form;
+    public Turtle(Display form)
     {
         this.form = form;
     }
@@ -25,12 +25,12 @@ public class Turtle
     {
         form = CreateUI();
     }
-    private static Form1 CreateUI()
+    private static Display CreateUI()
     {
-        Form1? form = null;
+        Display? form = null;
         var thread = new Thread(() => {
             //Thread.CurrentThread.IsBackground = false;
-            var form1 = new Form1();
+            var form1 = new Display();
             form = form1;
             Application.Run(form1);
         });
