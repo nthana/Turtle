@@ -39,7 +39,7 @@ public class Forward : Command
 
         // todo: recheck rounding error
         var position = startPosition + displacement * (accumTime/endTime);
-        var pen = new Pen(turtle.PenColor, 5);
+        var pen = new Pen(turtle.PenColor, 10);
         pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
         pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
         myBuffer.Graphics.DrawLine(pen, (PointF)turtle.Position, (PointF)position);

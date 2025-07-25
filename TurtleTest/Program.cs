@@ -20,7 +20,8 @@ internal static class Program
         // ถ้าใช้เต่าตัวเดียวกัน น่าจะมีปัญหา
 
         //NewOne();
-        UseOne();
+        //UseOne();
+        TwoTurtle();
     }
 
     static void NewOne()
@@ -59,5 +60,19 @@ internal static class Program
         //PenColor = Color.Green;
         //Direction = -60f;
         //Forward(300);
+    }
+
+    static void TwoTurtle()
+    {
+        Position = new Vector2(300, 100);
+        PenColor = Color.Red;
+        Direction = 60f;
+        Forward(300);
+
+        var t2 = new Turtle();
+        t2.Position = new Vector2(300, 100);
+        t2.PenColor = Color.Blue;
+        t2.Direction = 180f;
+        t2.Forward(300);
     }
 }

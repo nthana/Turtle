@@ -107,4 +107,23 @@ public partial class Display : Form
     {
         Environment.Exit(0);
     }
+
+    public static Display CreateUIThread()
+    {
+        Display? form = null;
+        var thread = new Thread(() => {
+            //Thread.CurrentThread.IsBackground = false;
+            var form1 = new Display();
+            form = form1;
+            Application.Run(form1);
+        });
+        thread.Start();
+
+        while (form == null)
+            Thread.Sleep(50);
+
+        form!.WaitForStart();
+        return form;
+    }
+
 }

@@ -14,6 +14,7 @@ public class Turtle
     public float Direction { get; set; }    // todo: change unit to degree
     public float Speed { get; set; } = 100f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
     public Color PenColor { get; set; } = Color.Black;
+    public float PenSize { get; set; } = 10;
 
     private Display form;
     public Turtle(Display form)
@@ -23,24 +24,7 @@ public class Turtle
 
     public Turtle()
     {
-        form = CreateUI();
-    }
-    private static Display CreateUI()
-    {
-        Display? form = null;
-        var thread = new Thread(() => {
-            //Thread.CurrentThread.IsBackground = false;
-            var form1 = new Display();
-            form = form1;
-            Application.Run(form1);
-        });
-        thread.Start();
-
-        while (form == null)
-            Thread.Sleep(50);
-
-        form!.WaitForStart();
-        return form;
+        form = StaticDisplay.Value;
     }
 
     public void Forward(float distant)

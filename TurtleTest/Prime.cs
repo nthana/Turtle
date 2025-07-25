@@ -18,11 +18,7 @@ public static class Prime
     public static Vector2 Position { get { return Turtle.Position; } set { Turtle.Position = value; } }
     public static float Speed { get { return Turtle.Speed; } set { Turtle.Speed = value; } }
 
-    public static float Direction 
-    { 
-        get { return Turtle.Direction; } 
-        set { Turtle.Direction = value; }
-    }
+    public static float Direction { get { return Turtle.Direction; } set { Turtle.Direction = value; } }
 
     public static void Forward(float distant)
     {
