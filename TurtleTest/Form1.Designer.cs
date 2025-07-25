@@ -37,7 +37,6 @@
             ClientSize = new Size(800, 450);
             Name = "Form1";
             Text = "Form1";
-            Load += Form1_Load;
             Paint += Form1_Paint;
             KeyDown += Form1_KeyDown;
             ResumeLayout(false);

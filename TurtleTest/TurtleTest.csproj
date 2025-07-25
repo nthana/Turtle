@@ -8,4 +8,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Unused.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Unused.cs" />
+  </ItemGroup>
+
 </Project>

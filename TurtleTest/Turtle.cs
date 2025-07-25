@@ -4,8 +4,9 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using TurtleTest;
 
-namespace TurtleTest;
+namespace ThanaNita.Turtles;
 
 public class Turtle
 {
