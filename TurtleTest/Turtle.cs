@@ -42,9 +42,13 @@ public class Turtle
     {
         form.QueueAndWait(new Walk(this, distant, false));
     }
-    public void TurnRight(float angle)
+    public void TurnLeft(float angle)
     {
         form.QueueAndWait(new Turn(this, angle));
+    }
+    public void TurnRight(float angle)
+    {
+        form.QueueAndWait(new Turn(this, angle, false));
     }
     public void Dot(Color color, float size)
     {

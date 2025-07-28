@@ -34,7 +34,7 @@ partial class Display
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(838, 844);
+        ClientSize = new Size(778, 744);
         Location = new Point(700, 0);
         Name = "Display";
         FormClosed += Display_FormClosed;

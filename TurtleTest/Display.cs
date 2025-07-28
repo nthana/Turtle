@@ -1,3 +1,4 @@
+using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
@@ -49,7 +50,6 @@ public partial class Display : Form
     {
         InitializeComponent();
 
-        Debug.WriteLine(DoubleBuffered);
         this.DoubleBuffered = true;
 
         timer.Interval = 1000 / 60;
@@ -62,12 +62,12 @@ public partial class Display : Form
         startedEvent.Set();
 
         turtleImage = Image.FromFile("turtle.png");
+
+        Debug.WriteLine(ClientSize);
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
     {
-        Debug.WriteLine(watch.ElapsedMilliseconds);
-
         float deltaTime = (float)watch.Elapsed.TotalSeconds;
         watch.Restart();
 
@@ -94,10 +94,18 @@ public partial class Display : Form
         buffer.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
 
         buffer.Graphics.Clear(Color.LightGray);
+        TransformToCenter(buffer.Graphics);
         //var pen = new Pen(Color.Blue, 15);
         //buffer.Graphics.DrawEllipse(pen, this.DisplayRectangle);
 
         return buffer;
+    }
+
+    private void TransformToCenter(Graphics g)
+    {
+        g.ScaleTransform(1, -1, MatrixOrder.Append);
+        g.TranslateTransform(400, 400, MatrixOrder.Append);
+
     }
 
     private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -111,6 +119,7 @@ public partial class Display : Form
     private void Form1_Paint(object sender, PaintEventArgs e)
     {
         Graphics g = e.Graphics;
+        //g.TranslateTransform(ClientSize.Width / 2, ClientSize.Height / 2);
         myBuffer.Render(g);
 
         DrawTurtles(g);
@@ -129,6 +138,7 @@ public partial class Display : Form
         g.TranslateTransform(-size.Width/2, -size.Height/2);
         g.RotateTransform(turtle.Direction + 90, MatrixOrder.Append);
         g.TranslateTransform(turtle.Position.X, turtle.Position.Y, MatrixOrder.Append);
+        TransformToCenter(g);
 
         g.DrawImage(turtleImage, 0, 0);
 

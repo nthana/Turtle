@@ -30,17 +30,23 @@ internal static class Program
 
         t1.Speed = 200;
 
-        t1.Position = new Vector2(300, 100);
         t1.PenColor = Color.Red;
-        t1.TurnRight(60);
+        t1.TurnLeft(60);
         t1.Forward(300);
+        Debug.WriteLine(t1.Position);
 
         t1.PenColor = Color.Blue;
-        t1.TurnRight(120);
+        t1.TurnLeft(120);
         t1.Forward(300);
+        Debug.WriteLine(t1.Position);
 
         t1.PenColor = Color.Green;
-        t1.TurnRight(120);
+        t1.TurnLeft(120);
+        t1.Forward(300);
+        Debug.WriteLine(t1.Position);
+
+        t1.PenColor = Color.Yellow;
+        t1.TurnRight(30);
         t1.Forward(300);
     }
 
