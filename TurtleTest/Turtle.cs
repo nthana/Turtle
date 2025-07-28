@@ -20,11 +20,12 @@ public class Turtle
     public Turtle(Display form)
     {
         this.form = form;
+        this.form.AddTurtle(this);
     }
 
     public Turtle()
+        : this(StaticDisplay.Value)
     {
-        form = StaticDisplay.Value;
     }
 
     public void Forward(float distant)

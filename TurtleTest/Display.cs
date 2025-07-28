@@ -11,6 +11,13 @@ public partial class Display : Form
     private AutoResetEvent finishCommandEvent = new AutoResetEvent(false);
     private Command? command = null;
     private BufferedGraphics myBuffer;
+    private Image turtleImage;
+
+    private List<Turtle> Turtles = new();
+    public void AddTurtle(Turtle turtle)
+    {
+        Turtles.Add(turtle);
+    }
     public void WaitForStart()
     {
         startedEvent.WaitOne();
@@ -50,6 +57,8 @@ public partial class Display : Form
         myBuffer = CreateBuf();
 
         startedEvent.Set();
+
+        turtleImage = Image.FromFile("turtle.png");
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
@@ -100,8 +109,22 @@ public partial class Display : Form
     {
         Graphics g = e.Graphics;
         myBuffer.Render(g);
-    }
 
+        DrawTurtles(g);
+    }
+    private void DrawTurtles(Graphics g)
+    {
+        for (int i = 0; i < Turtles.Count; i++)
+            DrawTurtle(g, Turtles[i]);
+    }
+    private void DrawTurtle(Graphics g, Turtle turtle)
+    {
+//        float centerX = 
+//        g.TranslateTransform
+
+        var size = turtleImage.Size;
+        g.DrawImage(turtleImage, turtle.Position.X - size.Width / 2, turtle.Position.Y - size.Height / 2);
+    }
 
     private void Display_FormClosed(object sender, FormClosedEventArgs e)
     {
@@ -111,7 +134,8 @@ public partial class Display : Form
     public static Display CreateUIThread()
     {
         Display? form = null;
-        var thread = new Thread(() => {
+        var thread = new Thread(() =>
+        {
             //Thread.CurrentThread.IsBackground = false;
             var form1 = new Display();
             form = form1;
@@ -126,4 +150,7 @@ public partial class Display : Form
         return form;
     }
 
+    private void Display_Load(object sender, EventArgs e)
+    {
+    }
 }

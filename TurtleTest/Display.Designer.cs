@@ -37,6 +37,7 @@ partial class Display
         ClientSize = new Size(800, 450);
         Name = "Display";
         FormClosed += Display_FormClosed;
+        Load += Display_Load;
         Paint += Form1_Paint;
         KeyDown += Form1_KeyDown;
         ResumeLayout(false);
