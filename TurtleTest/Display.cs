@@ -131,6 +131,9 @@ public partial class Display : Form
     }
     private void DrawTurtle(Graphics g, Turtle turtle)
     {
+        if (!turtle.Visible)
+            return;
+
         GraphicsState state = g.Save();
 
         var size = turtleImage.Size;

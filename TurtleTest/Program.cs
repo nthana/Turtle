@@ -19,7 +19,8 @@ internal static class Program
         // ถ้า สอง thread ตัว screen น่าจะต้องมีสอง queue ตาม thread
         // ถ้าใช้เต่าตัวเดียวกัน น่าจะมีปัญหา
 
-        NewOne();
+        //NewOne();
+        Loops();
         //UseOne();
         //TwoTurtle();
     }
@@ -50,17 +51,28 @@ internal static class Program
         t1.Forward(300);
     }
 
+    static void Loops()
+    {
+        Visible = false;
+        PenColor = Color.Red;
+        for (int i = 0; i < 25; ++i)
+        {
+            Forward(200);
+            TurnRight(88);
+        }
+    }
+
     static void UseOne()
     {
-        Speed = 200;
+        Visible = false;
 
-        Position = new Vector2(300, 100);
+        PenOn = false;
         PenColor = Color.Red;
         Direction = 60f;
         Forward(300);
 
         //Console.ReadLine();
-
+        PenOn = true;
         PenColor = Color.Blue;
         TurnRight(120);
         Forward(300);

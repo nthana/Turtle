@@ -19,13 +19,13 @@ public class Walk : Command
 
     public Walk(Turtle turtle, float distant, bool forward = true)
     {
-        if (distant < 0)
-            throw new Exception("Turtle cannot walk with negative distance.");
+//        if (distant < 0)
+//            throw new Exception("Turtle cannot walk with negative distance.");
 
         this.forward = forward;
         this.turtle = turtle;
 
-        endTime = distant / turtle.Speed;
+        endTime = MathF.Abs(distant) / turtle.Speed;
         startPosition = turtle.Position;
         var radian = turtle.DirectionRadian;
         displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant * DirectionValue();
@@ -44,8 +44,12 @@ public class Walk : Command
 
         // todo: recheck rounding error
         var position = startPosition + displacement * (accumTime/endTime);
-        var pen = PenCache.Get(turtle.PenColor, 10);
-        myBuffer.Graphics.DrawLine(pen, (PointF)turtle.Position, (PointF)position);
+
+        if (turtle.PenOn)
+        {
+            var pen = PenCache.Get(turtle.PenColor, turtle.PenSize);
+            myBuffer.Graphics.DrawLine(pen, (PointF)turtle.Position, (PointF)position);
+        }
 
         turtle.Position = position;
 

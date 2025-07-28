@@ -14,6 +14,8 @@ public static class One
         turtle = new Turtle();
     }
 
+    public static bool Visible { get { return Turtle.Visible; } set { Turtle.Visible = value; } }
+    public static bool PenOn { get { return Turtle.PenOn; } set { Turtle.PenOn = value; } }
     public static Color PenColor { get { return Turtle.PenColor; } set { Turtle.PenColor = value; } }
     public static Vector2 Position { get { return Turtle.Position; } set { Turtle.Position = value; } }
     public static float Speed { get { return Turtle.Speed; } set { Turtle.Speed = value; } }
@@ -29,6 +31,10 @@ public static class One
         Turtle.Backward(distant);
     }
     public static void TurnRight(float angle)
+    {
+        Turtle.TurnRight(angle);
+    }
+    public static void TurnLeft(float angle)
     {
         Turtle.TurnLeft(angle);
     }

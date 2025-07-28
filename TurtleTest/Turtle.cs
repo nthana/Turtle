@@ -12,9 +12,11 @@ public class Turtle
 {
     public Vector2 Position { get; set; }
     public float Direction { get; set; }    // todo: change unit to degree
-    public float Speed { get; set; } = 100f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
+    public float Speed { get; set; } = 400f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
     public Color PenColor { get; set; } = Color.Black;
-    public float PenSize { get; set; } = 10;
+    public float PenSize { get; set; } = 3;
+    public bool PenOn { get; set; } = true;
+    public bool Visible { get; set; } = true;
 
     public float DirectionRadian
     {
@@ -40,7 +42,7 @@ public class Turtle
     }
     public void Backward(float distant)
     {
-        form.QueueAndWait(new Walk(this, distant, false));
+        form.QueueAndWait(new Walk(this, -distant));
     }
     public void TurnLeft(float angle)
     {
