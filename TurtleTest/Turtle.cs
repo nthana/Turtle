@@ -30,10 +30,10 @@ public class Turtle
 
     public void Forward(float distant)
     {
-        form.QueueAndWait(new Forward(this, distant));
+        form.QueueAndWait(new Walk(this, distant));
     }
     public void Backward(float distant)
     {
-        form.QueueAndWait(new Forward(this, distant, false));
+        form.QueueAndWait(new Walk(this, distant, false));
     }
 }

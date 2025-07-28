@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace ThanaNita.Turtles;
 
-public class Forward : Command
+public class Walk : Command
 {
     private Vector2 startPosition;
     private Vector2 displacement;
@@ -17,7 +17,7 @@ public class Forward : Command
     private Turtle turtle;
     private bool forward;
 
-    public Forward(Turtle turtle, float distant, bool forward = true)
+    public Walk(Turtle turtle, float distant, bool forward = true)
     {
         this.forward = forward;
         this.turtle = turtle;
