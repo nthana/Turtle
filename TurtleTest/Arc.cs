@@ -14,35 +14,38 @@ public class Arc : Command
     private float endTime;
     private float accumTime = 0;
     private RectangleF rect;
-    bool turnRight;
+    Vector2 center;
+    bool turnLeft;
+    float radius;
 
     private Turtle turtle;
 
-    public Arc(Turtle turtle, float radius, float angleDegree, bool turnRight = true)
+    public Arc(Turtle turtle, float radius, float angleDegree, bool turnLeft)
     {
 
         this.turtle = turtle;
-        this.turnRight = turnRight;
+        this.turnLeft = turnLeft;
+        this.radius = radius;
 
         float speedCoefficient = 1f;
         endTime = MathF.Abs(angleDegree) / (turtle.Speed * speedCoefficient);
         startAngle = turtle.Direction;
         var angleRadian = turtle.DirectionRadian;
 
-        var center = CalcCenter(radius, angleRadian, turnRight);
+        center = CalcCenter(radius, angleRadian);
 
         rect = new RectangleF(
                         (PointF)(center - new Vector2(radius, radius)),
                         new SizeF(radius * 2, radius * 2)
             );
 
-        displacement = angleDegree * (!turnRight ? 1: -1);
+        displacement = angleDegree * (turnLeft ? 1: -1);
     }
 
-    Vector2 CalcCenter(float radius, float angleRadian, bool turnRight)
+    Vector2 CalcCenter(float radius, float angleRadian)
     {
         Vector2 center;
-        if (!turnRight)
+        if (turnLeft)
         {
             center = turtle.Position + radius * new Vector2(
                 -MathF.Sin(angleRadian), MathF.Cos(angleRadian));
@@ -68,13 +71,31 @@ public class Arc : Command
         {
             var pen = PenCache.Get(turtle.PenColor, turtle.PenSize);
 
-            if( !turnRight)
-                myBuffer.Graphics.DrawArc(pen, rect, startAngle-90, partialDisplacement);
+            if (turnLeft)
+                myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction - 90, direction - turtle.Direction);
             else
-                myBuffer.Graphics.DrawArc(pen, rect, startAngle + 90, partialDisplacement);
+            {
+                float sweep = turtle.Direction - direction;
+                myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction + 90 - sweep, sweep);
+            }
         }
 
         turtle.Direction = direction;
+
+        //set turtle position
+        if (turnLeft)
+        {
+            var directionAsRadian = (turtle.Direction) * MathF.PI / 180;
+            turtle.Position = center - radius * new Vector2(
+                        -MathF.Sin(directionAsRadian), MathF.Cos(directionAsRadian));
+        }
+        else
+        {
+            var directionAsRadian = (turtle.Direction) * MathF.PI / 180;
+            turtle.Position = center - radius * new Vector2(
+                        MathF.Sin(directionAsRadian), -MathF.Cos(directionAsRadian));
+
+        }
 
 
         return IsFinished();

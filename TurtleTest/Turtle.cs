@@ -59,10 +59,10 @@ public class Turtle
     }
     public void ArcLeft(float radius, float angle)
     {
-        form.QueueAndWait(new Arc(this, radius, angle, false));
+        form.QueueAndWait(new Arc(this, radius, angle, true));
     }
     public void ArcRight(float radius, float angle)
     {
-        form.QueueAndWait(new Arc(this, radius, angle, true));
+        form.QueueAndWait(new Arc(this, radius, angle, false));
     }
 }

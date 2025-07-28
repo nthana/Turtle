@@ -100,10 +100,18 @@ internal static class Program
     static void TestArc()
     {
         Speed = 100;
+        PenColor = Color.Blue;
+        TurnRight(30);
+        Forward(100);
+        ArcLeft(100, 90+30+180); // radius and angle
+
+        Position = new Vector2(0, 0);
+        Direction = 90;
         PenColor = Color.Red;
         TurnRight(30);
         Forward(100);
-
-        ArcLeft(100, 90+30); // radius and angle
+        ArcRight(100, 90 + 30 + 180); // radius and angle
+        Forward(200);
+        Backward(400);
     }
 }
