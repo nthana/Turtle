@@ -38,4 +38,12 @@ public static class One
     {
         Turtle.TurnLeft(angle);
     }
+    public static void ArcLeft(float radius, float angle)
+    {
+        Turtle.ArcLeft(radius, angle);
+    }
+    public static void ArcRight(float radius, float angle)
+    {
+        Turtle.ArcRight(radius, angle);
+    }
 }

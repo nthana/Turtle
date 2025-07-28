@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -11,7 +12,7 @@ namespace ThanaNita.Turtles;
 public class Turtle
 {
     public Vector2 Position { get; set; }
-    public float Direction { get; set; }    // todo: change unit to degree
+    public float Direction { get; set; } = 90;
     public float Speed { get; set; } = 400f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
     public Color PenColor { get; set; } = Color.Black;
     public float PenSize { get; set; } = 3;
@@ -55,5 +56,13 @@ public class Turtle
     public void Dot(Color color, float size=10)
     {
         form.QueueAndWait(new Dot(this, color, size));
+    }
+    public void ArcLeft(float radius, float angle)
+    {
+        form.QueueAndWait(new Arc(this, radius, angle, false));
+    }
+    public void ArcRight(float radius, float angle)
+    {
+        form.QueueAndWait(new Arc(this, radius, angle, true));
     }
 }

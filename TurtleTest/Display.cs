@@ -69,6 +69,20 @@ public partial class Display : Form
 
         Debug.WriteLine(ClientSize);
         Debug.WriteLine(DisplayRectangle);
+        Debug.WriteLine(Screen.PrimaryScreen?.Bounds.Size.Width);
+    }
+
+    private void SetWindowPosition()
+    {
+        if (Screen.PrimaryScreen == null)
+            return;
+
+        int halfWidth = Screen.PrimaryScreen.Bounds.Size.Width / 2;
+
+        this.Location = new Point(
+            halfWidth + (halfWidth - this.Size.Width) / 2,
+            (Screen.PrimaryScreen.Bounds.Size.Height - this.Size.Height) / 2
+            );
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
@@ -118,8 +132,14 @@ public partial class Display : Form
         var grid = 25;
         var size = ClientSize;
 
-        var lightGreen = Color.FromArgb(210, 227, 217);//(227, 245, 234);
+        //int grayValue = 200; // 211
+        //Color gray = Color.FromArgb(grayValue, grayValue, grayValue);
+
+        var lightGreen = Color.FromArgb(190, 207, 197);//(227, 245, 234);
         var pen = new Pen(lightGreen, 1);
+
+        var veryLightGreen = Color.FromArgb(227, 245, 234);
+        var penVeryLight = new Pen(veryLightGreen, 1);
 
         for (int x = (int)center.X % grid; x < size.Width; x += grid)
             g.DrawLine(pen, x, 0, x, size.Height);
@@ -129,9 +149,7 @@ public partial class Display : Form
 
         int bigGrid = 100;
         int delta = 3;
-        int grayValue = 200; // 211
-        Color gray = Color.FromArgb(grayValue, grayValue, grayValue);
-        var brush = new SolidBrush(gray);
+        var brush = new SolidBrush(lightGreen);
         for (int x = (int)center.X % bigGrid; x < size.Width; x += bigGrid)
             for (int y = (int)center.Y % bigGrid; y < size.Height; y += bigGrid)
                 g.FillEllipse(brush, new Rectangle(x - delta, y - delta, delta * 2, delta * 2));
@@ -204,5 +222,6 @@ public partial class Display : Form
 
     private void Display_Load(object sender, EventArgs e)
     {
+        SetWindowPosition();
     }
 }
