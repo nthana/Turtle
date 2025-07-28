@@ -15,15 +15,22 @@ public class Forward : Command
     private float accumTime = 0;
 
     private Turtle turtle;
+    private bool forward;
 
-    public Forward(Turtle turtle, float distant)
+    public Forward(Turtle turtle, float distant, bool forward = true)
     {
+        this.forward = forward;
         this.turtle = turtle;
 
         endTime = distant / turtle.Speed;
         startPosition = turtle.Position;
         var radian = ToRadian(turtle.Direction);
-        displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant;
+        displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant * DirectionValue();
+    }
+
+    private int DirectionValue()
+    {
+        return forward ? 1 : -1;
     }
 
     private float ToRadian(float direction)

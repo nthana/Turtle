@@ -56,6 +56,7 @@ internal static class Program
         PenColor = Color.Blue;
         Direction = 180f;
         Forward(300);
+        Backward(600);
 
         //PenColor = Color.Green;
         //Direction = -60f;

@@ -32,4 +32,8 @@ public class Turtle
     {
         form.QueueAndWait(new Forward(this, distant));
     }
+    public void Backward(float distant)
+    {
+        form.QueueAndWait(new Forward(this, distant, false));
+    }
 }

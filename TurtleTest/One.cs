@@ -24,4 +24,8 @@ public static class One
     {
         Turtle.Forward(distant);
     }
+    public static void Backward(float distant)
+    {
+        Turtle.Backward(distant);
+    }
 }
