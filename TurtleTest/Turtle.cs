@@ -50,10 +50,10 @@ public class Turtle
     }
     public void TurnRight(float angle)
     {
-        form.QueueAndWait(new Turn(this, angle, false));
+        form.QueueAndWait(new Turn(this, -angle));
     }
-    public void Dot(Color color, float size)
+    public void Dot(Color color, float size=10)
     {
-
+        form.QueueAndWait(new Dot(this, color, size));
     }
 }

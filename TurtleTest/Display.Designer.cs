@@ -34,9 +34,13 @@ partial class Display
         // 
         AutoScaleDimensions = new SizeF(10F, 25F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(778, 744);
+        BackColor = Color.White;
+        ClientSize = new Size(828, 944);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Location = new Point(700, 0);
+        MaximizeBox = false;
         Name = "Display";
+        StartPosition = FormStartPosition.CenterScreen;
         FormClosed += Display_FormClosed;
         Load += Display_Load;
         Paint += Form1_Paint;

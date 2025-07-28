@@ -29,4 +29,11 @@ t1.fd(400);*/
         //Debug.WriteLine(Thread.CurrentThread.ManagedThreadId);
     }
 
- */ 
+ */
+
+//        if (distant < 0)
+//            throw new Exception("Turtle cannot walk with negative distance.");
+
+//var pen = new Pen(Color.Blue, 15);
+//buffer.Graphics.DrawEllipse(pen, this.DisplayRectangle);
+

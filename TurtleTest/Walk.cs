@@ -15,25 +15,15 @@ public class Walk : Command
     private float accumTime = 0;
 
     private Turtle turtle;
-    private bool forward;
 
-    public Walk(Turtle turtle, float distant, bool forward = true)
+    public Walk(Turtle turtle, float distant)
     {
-//        if (distant < 0)
-//            throw new Exception("Turtle cannot walk with negative distance.");
-
-        this.forward = forward;
         this.turtle = turtle;
 
         endTime = MathF.Abs(distant) / turtle.Speed;
         startPosition = turtle.Position;
         var radian = turtle.DirectionRadian;
-        displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant * DirectionValue();
-    }
-
-    private int DirectionValue()
-    {
-        return forward ? 1 : -1;
+        displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant;
     }
 
     public bool Act(float deltaTime, BufferedGraphics myBuffer)

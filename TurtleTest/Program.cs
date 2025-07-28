@@ -19,8 +19,8 @@ internal static class Program
         // ถ้า สอง thread ตัว screen น่าจะต้องมีสอง queue ตาม thread
         // ถ้าใช้เต่าตัวเดียวกัน น่าจะมีปัญหา
 
-        //NewOne();
-        Loops();
+        NewOne();
+        //Loops();
         //UseOne();
         //TwoTurtle();
     }
@@ -29,11 +29,10 @@ internal static class Program
     {
         var t1 = new Turtle();
 
-        t1.Speed = 200;
-
         t1.PenColor = Color.Red;
         t1.TurnLeft(60);
         t1.Forward(300);
+        t1.Dot(Color.Red);
         Debug.WriteLine(t1.Position);
 
         t1.PenColor = Color.Blue;
@@ -53,8 +52,8 @@ internal static class Program
 
     static void Loops()
     {
-        Visible = false;
-        PenColor = Color.Red;
+        //Visible = false;
+        PenColor = Color.Blue;
         for (int i = 0; i < 25; ++i)
         {
             Forward(200);

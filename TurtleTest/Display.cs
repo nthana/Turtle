@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Numerics;
 using System.Security.Policy;
 
 namespace ThanaNita.Turtles;
@@ -16,6 +17,7 @@ public partial class Display : Form
     private Command? command = null;
     private BufferedGraphics myBuffer;
     private Image turtleImage;
+    Vector2 center;
 
     private List<Turtle> Turtles = new();
     public void AddTurtle(Turtle turtle)
@@ -50,6 +52,8 @@ public partial class Display : Form
     {
         InitializeComponent();
 
+        center = new Vector2(ClientSize.Width / 2, ClientSize.Height / 2);
+
         this.DoubleBuffered = true;
 
         timer.Interval = 1000 / 60;
@@ -64,6 +68,7 @@ public partial class Display : Form
         turtleImage = Image.FromFile("turtle.png");
 
         Debug.WriteLine(ClientSize);
+        Debug.WriteLine(DisplayRectangle);
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
@@ -91,21 +96,45 @@ public partial class Display : Form
         buffer = currentContext.Allocate(this.CreateGraphics(),
            this.DisplayRectangle);
 
-        buffer.Graphics.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+        buffer.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-        buffer.Graphics.Clear(Color.LightGray);
-        TransformToCenter(buffer.Graphics);
-        //var pen = new Pen(Color.Blue, 15);
-        //buffer.Graphics.DrawEllipse(pen, this.DisplayRectangle);
+        buffer.Graphics.Clear(Color.White);
+
+        DrawGrid(buffer.Graphics, center);
+        TransformToCenter(buffer.Graphics, center);
 
         return buffer;
     }
 
-    private void TransformToCenter(Graphics g)
+    private void TransformToCenter(Graphics g, Vector2 center)
     {
         g.ScaleTransform(1, -1, MatrixOrder.Append);
-        g.TranslateTransform(400, 400, MatrixOrder.Append);
+        g.TranslateTransform(center.X, center.Y, MatrixOrder.Append);
+    }
 
+    // draw before transform
+    private void DrawGrid(Graphics g, Vector2 center)
+    {
+        var grid = 25;
+        var size = ClientSize;
+
+        var lightGreen = Color.FromArgb(210, 227, 217);//(227, 245, 234);
+        var pen = new Pen(lightGreen, 1);
+
+        for (int x = (int)center.X % grid; x < size.Width; x += grid)
+            g.DrawLine(pen, x, 0, x, size.Height);
+
+        for (int y = (int)center.Y % grid; y < size.Height; y += grid)
+            g.DrawLine(pen,0, y, size.Width, y);
+
+        int bigGrid = 100;
+        int delta = 3;
+        int grayValue = 200; // 211
+        Color gray = Color.FromArgb(grayValue, grayValue, grayValue);
+        var brush = new SolidBrush(gray);
+        for (int x = (int)center.X % bigGrid; x < size.Width; x += bigGrid)
+            for (int y = (int)center.Y % bigGrid; y < size.Height; y += bigGrid)
+                g.FillEllipse(brush, new Rectangle(x - delta, y - delta, delta * 2, delta * 2));
     }
 
     private void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -119,7 +148,6 @@ public partial class Display : Form
     private void Form1_Paint(object sender, PaintEventArgs e)
     {
         Graphics g = e.Graphics;
-        //g.TranslateTransform(ClientSize.Width / 2, ClientSize.Height / 2);
         myBuffer.Render(g);
 
         DrawTurtles(g);
@@ -141,7 +169,7 @@ public partial class Display : Form
         g.TranslateTransform(-size.Width/2, -size.Height/2);
         g.RotateTransform(turtle.Direction + 90, MatrixOrder.Append);
         g.TranslateTransform(turtle.Position.X, turtle.Position.Y, MatrixOrder.Append);
-        TransformToCenter(g);
+        TransformToCenter(g, center);
 
         g.DrawImage(turtleImage, 0, 0);
 
