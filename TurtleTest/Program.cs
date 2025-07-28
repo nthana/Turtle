@@ -1,7 +1,7 @@
 using System.Diagnostics;
 using System.Numerics;
 using ThanaNita.Turtles;
-using static ThanaNita.Turtles.Prime;
+using static ThanaNita.Turtles.One;
 
 
 namespace TurtleTest;
@@ -20,8 +20,8 @@ internal static class Program
         // ถ้าใช้เต่าตัวเดียวกัน น่าจะมีปัญหา
 
         //NewOne();
-        //UseOne();
-        TwoTurtle();
+        UseOne();
+        //TwoTurtle();
     }
 
     static void NewOne()

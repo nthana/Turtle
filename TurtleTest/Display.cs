@@ -1,4 +1,7 @@
 using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Security.Policy;
 
 namespace ThanaNita.Turtles;
 
@@ -119,11 +122,19 @@ public partial class Display : Form
     }
     private void DrawTurtle(Graphics g, Turtle turtle)
     {
-//        float centerX = 
-//        g.TranslateTransform
+        GraphicsState state = g.Save();
 
         var size = turtleImage.Size;
-        g.DrawImage(turtleImage, turtle.Position.X - size.Width / 2, turtle.Position.Y - size.Height / 2);
+        float centerX = turtle.Position.X - size.Width / 2;
+        g.TranslateTransform(-size.Width/2, -size.Height/2);
+        g.RotateTransform(turtle.Direction + 90, MatrixOrder.Append);
+        g.TranslateTransform(turtle.Position.X, turtle.Position.Y, MatrixOrder.Append);
+
+        g.DrawImage(turtleImage, 0, 0);
+
+        //g.DrawImage(turtleImage, turtle.Position.X - size.Width / 2, turtle.Position.Y - size.Height / 2);
+
+        g.Restore(state);
     }
 
     private void Display_FormClosed(object sender, FormClosedEventArgs e)

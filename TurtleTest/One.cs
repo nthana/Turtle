@@ -2,7 +2,7 @@
 
 namespace ThanaNita.Turtles;
 
-public static class Prime
+public static class One
 {
     public static Turtle Turtle { get { CheckInit(); return turtle!; } }
     private static Turtle? turtle;
