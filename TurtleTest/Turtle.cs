@@ -16,6 +16,12 @@ public class Turtle
     public Color PenColor { get; set; } = Color.Black;
     public float PenSize { get; set; } = 10;
 
+    public float DirectionRadian
+    {
+        get { return Direction * MathF.PI / 180; }
+        set { Direction = value * 180 / MathF.PI; }
+    }
+
     private Display form;
     public Turtle(Display form)
     {
@@ -35,5 +41,13 @@ public class Turtle
     public void Backward(float distant)
     {
         form.QueueAndWait(new Walk(this, distant, false));
+    }
+    public void TurnRight(float angle)
+    {
+        form.QueueAndWait(new Turn(this, angle));
+    }
+    public void Dot(Color color, float size)
+    {
+
     }
 }

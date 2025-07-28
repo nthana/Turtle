@@ -28,4 +28,8 @@ public static class One
     {
         Turtle.Backward(distant);
     }
+    public static void TurnRight(float angle)
+    {
+        Turtle.TurnRight(angle);
+    }
 }

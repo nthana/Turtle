@@ -7,28 +7,29 @@ using System.Numerics;
 
 namespace ThanaNita.Turtles;
 
-public class Walk : Command
+public class Turn : Command
 {
-    private Vector2 startPosition;
-    private Vector2 displacement;
+    private float startPosition;
+    private float displacement;
     private float endTime;
     private float accumTime = 0;
 
     private Turtle turtle;
     private bool forward;
 
-    public Walk(Turtle turtle, float distant, bool forward = true)
+    public Turn(Turtle turtle, float angleDegree, bool forward = true)
     {
-        if (distant < 0)
-            throw new Exception("Turtle cannot walk with negative distance.");
+        if (angleDegree < 0)
+            throw new Exception("Turtle cannot turn with negative angle.");
 
         this.forward = forward;
         this.turtle = turtle;
 
-        endTime = distant / turtle.Speed;
-        startPosition = turtle.Position;
+        float speedCoefficient = 1f;
+        endTime = angleDegree / (turtle.Speed * speedCoefficient);
+        startPosition = turtle.Direction;
         var radian = turtle.DirectionRadian;
-        displacement = new Vector2(MathF.Cos(radian), MathF.Sin(radian)) * distant * DirectionValue();
+        displacement = angleDegree * DirectionValue();
     }
 
     private int DirectionValue()
@@ -42,12 +43,9 @@ public class Walk : Command
         if(accumTime > endTime)
             accumTime = endTime;
 
-        // todo: recheck rounding error
-        var position = startPosition + displacement * (accumTime/endTime);
-        var pen = PenCache.Get(turtle.PenColor, 10);
-        myBuffer.Graphics.DrawLine(pen, (PointF)turtle.Position, (PointF)position);
+        var direction = startPosition + displacement * (accumTime/endTime);
 
-        turtle.Position = position;
+        turtle.Direction = direction;
 
         return IsFinished();
     }
