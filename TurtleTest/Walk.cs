@@ -15,6 +15,7 @@ public class Walk : Command
     private float endTime;
     private float accumTime = 0;
     PathBuilder path;
+    private bool neverAct = true;
 
     private Turtle turtle;
 
@@ -43,7 +44,11 @@ public class Walk : Command
             var pen = PenCache.Get(turtle.PenColor, turtle.PenSize);
             myBuffer.Graphics.DrawLine(pen, (PointF)turtle.Position, (PointF)position);
 
-            path.AddLine(startPosition, startPosition + displacement);
+            if (neverAct)
+            {
+                path.AddLine(startPosition, startPosition + displacement);
+                neverAct = false;
+            }
         }
 
         turtle.Position = position;

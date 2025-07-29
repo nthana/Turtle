@@ -28,6 +28,7 @@ internal static class Program
         TestFill();
     }
 
+    // สรุปว่าจริงๆ ไม่มี bug แล้ว bug เกิดจากเราที่ add line ใน path ซ้ำๆ มากเกินไป
     static void GDIDrawPathBug()
     {
         PenSize = 10;

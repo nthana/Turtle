@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
-using System.Numerics;
+using TurtleTest;
 
 namespace ThanaNita.Turtles;
 
@@ -18,14 +19,18 @@ public class Arc : Command
     bool turnLeft;
     float radius;
 
+    PathBuilder path;
+    private bool neverAct = true;
+
     private Turtle turtle;
 
-    public Arc(Turtle turtle, float radius, float angleDegree, bool turnLeft)
+    public Arc(Turtle turtle, float radius, float angleDegree, bool turnLeft, PathBuilder path)
     {
 
         this.turtle = turtle;
         this.turnLeft = turnLeft;
         this.radius = radius;
+        this.path = path;
 
         float speedCoefficient = 1f;
         endTime = MathF.Abs(angleDegree) / (turtle.Speed * speedCoefficient);
@@ -64,8 +69,7 @@ public class Arc : Command
         if(accumTime > endTime)
             accumTime = endTime;
 
-        var partialDisplacement = displacement * (accumTime / endTime);
-        var direction = startAngle + partialDisplacement;
+        var direction = startAngle + displacement * (accumTime / endTime);
 
         if (turtle.PenOn)
         {
@@ -77,6 +81,15 @@ public class Arc : Command
             {
                 float sweep = turtle.Direction - direction;
                 myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction + 90 - sweep, sweep);
+            }
+
+            if (neverAct)
+            {
+                if (turnLeft)
+                    path.AddArc(rect, startAngle-90, displacement);
+                else
+                    path.AddArc(rect, direction+90, displacement);
+                    neverAct = false;
             }
         }
 

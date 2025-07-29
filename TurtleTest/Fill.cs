@@ -11,14 +11,18 @@ namespace ThanaNita.Turtles;
 
 public class Fill : Command
 {
-    GraphicsPath path;
+    Turtle turtle;
+    PathBuilder pathBuilder;
+    //GraphicsPath path;
     Color lineColor;
     float lineSize;
     Color fillColor;
     bool finished = false;
-    public Fill(PathBuilder pathBuilder, Color color)
+    public Fill(Turtle turtle, PathBuilder pathBuilder, Color color)
     {
-        path = pathBuilder.GetPathAndReset();
+        this.turtle = turtle;
+        this.pathBuilder = pathBuilder;
+        //path = pathBuilder.GetPath();
         //path.CloseFigure();
         lineColor = pathBuilder.LineColor;
         lineSize = pathBuilder.LineSize;
@@ -27,10 +31,14 @@ public class Fill : Command
     public bool Act(float deltaTime, BufferedGraphics myBuffer)
     {
         SolidBrush brush = new SolidBrush(fillColor);
-        myBuffer.Graphics.FillPath(brush, path);
+        //myBuffer.Graphics.FillPath(brush, path);
+        pathBuilder.GraphicsFillPath(myBuffer.Graphics, brush);
 
-        //Pen pen = PenCache.Get(lineColor, lineSize);
+        Pen pen = PenCache.Get(lineColor, lineSize);
         //myBuffer.Graphics.DrawPath(pen, path);
+        pathBuilder.GraphicsDrawPath(myBuffer.Graphics, pen);
+
+        pathBuilder.Reset(turtle.PenColor, turtle.PenSize);
 
         finished = true;
         return IsFinished();

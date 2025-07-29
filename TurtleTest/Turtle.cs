@@ -78,11 +78,11 @@ public class Turtle
     }
     public void ArcLeft(float radius, float angle)
     {
-        form.QueueAndWait(new Arc(this, radius, angle, true));
+        form.QueueAndWait(new Arc(this, radius, angle, true, path));
     }
     public void ArcRight(float radius, float angle)
     {
-        form.QueueAndWait(new Arc(this, radius, angle, false));
+        form.QueueAndWait(new Arc(this, radius, angle, false, path));
     }
 
     /* จุดที่ต่างจาก fill ใน pencilcode
@@ -90,10 +90,12 @@ public class Turtle
      *    - a) และเป็นเพราะ GDI+ คำสั่ง DrawPath มี bug ทำให้หัวเส้นไม่ round ในบางกรณี
      *    - b) การวาดเส้นด้วย drawpath พบว่าเส้นที่ auto close path จะถูกวาดติดไปด้วย
      *    ถ้าจะแก้ปัญหานี้ ทำโดยเราต้องเก็บทั้ง line และ arc ทั้งหมด แล้วสั่งวาดทั้งหมดใน turn 
-     * //- การ reset fill จะเกิดขึ้นเมื่อยกปากกาด้วย
+     *    - จะแก้ได้ทั้ง bug (a) และทั้งปัญหาเส้นเกิน เวลามีหลาย loop (b)
+     
+     * ยังไม่ทำ //- การ reset fill จะเกิดขึ้นเมื่อยกปากกาด้วย
      *   // - เพื่อให้ path object ไม่ใหญ่เกินไป ?
      *   
-     * path object จะถูกเคลียร์เมื่อ
+     * path object จะถูก reset() เมื่อ
      * -เรียก fill แต่ละครั้ง 
      *
      * figure จะถูก close เมื่อ
@@ -102,6 +104,6 @@ public class Turtle
      */
     public void Fill(Color color)
     {
-        form.QueueAndWait(new Fill(path, color));
+        form.QueueAndWait(new Fill(this, path, color));
     }
 }

@@ -33,16 +33,30 @@ namespace TurtleTest
             path.CloseFigure();
         }
 
-        public GraphicsPath GetPathAndReset()
+/*        public GraphicsPath GetPath()
         {
             var oldPath = path;
-            Reset(LineColor, LineSize);
+            //Reset(LineColor, LineSize);
             return oldPath;
+        }*/
+
+        public void GraphicsFillPath(Graphics g, Brush brush)
+        {
+            g.FillPath(brush, path);
+        }
+        public void GraphicsDrawPath(Graphics g, Pen pen)
+        {
+            g.DrawPath(pen, path);
         }
 
         public void AddLine(Vector2 point1, Vector2 point2)
         {
             path.AddLine(point1.X, point1.Y, point2.X, point2.Y);
+        }
+
+        public void AddArc(RectangleF rect, float startAngle, float sweep)
+        {
+            path.AddArc(rect, startAngle, sweep);
         }
     }
 }
