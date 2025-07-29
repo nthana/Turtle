@@ -14,9 +14,9 @@ public class Turtle
 {
     // set โดยไม่กระทบต่อ path ( don't close figure)
     internal Vector2 InternalPosition { get => position; set => position = value; }
-    public Vector2 Position { 
-        get => position; 
-        set { CloseFigure(); position = value; } 
+    public Vector2 Position {
+        get => position;
+        set { CloseFigure(); position = value; }
     }
     public float Direction { get; set; } = 90;
     public float Speed { get; set; } = 300f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
@@ -77,7 +77,7 @@ public class Turtle
     {
         form.QueueAndWait(new Turn(this, -angle));
     }
-    public void Dot(Color color, float size=10)
+    public void Dot(Color color, float size = 10)
     {
         form.QueueAndWait(new Dot(this, color, size));
     }
@@ -90,25 +90,19 @@ public class Turtle
         form.QueueAndWait(new Arc(this, radius, angle, false, path));
     }
 
-    /* จุดที่ต่างจาก fill ใน pencilcode
-     * - fill จะกินพื้นที่ไปครึ่งหนึ่งของความกว้างของเส้น -> เพื่อความสะดวกในการเขียน   
-     *    OK: - a) และเป็นเพราะ GDI+ คำสั่ง DrawPath มี bug ทำให้หัวเส้นไม่ round ในบางกรณี
-     *    - b) การวาดเส้นด้วย drawpath พบว่าเส้นที่ auto close path จะถูกวาดติดไปด้วย
-     *    ถ้าจะแก้ปัญหานี้ ทำโดยเราต้องเก็บทั้ง line และ arc ทั้งหมด แล้วสั่งวาดทั้งหมดใน turn 
-     *    - จะแก้ได้ทั้ง bug (a) และทั้งปัญหาเส้นเกิน เวลามีหลาย loop (b)
-     
-     * ยังไม่ทำ //- การ reset fill จะเกิดขึ้นเมื่อยกปากกาด้วย
-     *   // - เพื่อให้ path object ไม่ใหญ่เกินไป ?
-     *   
-     * path object จะถูก reset() เมื่อ
+    /* 
+     * path จะถูก reset() เมื่อ
      * -เรียก fill แต่ละครั้ง 
+     * -เปลี่ยนสีปากกา หรือขนาดปากกา
      *
      * figure จะถูก close เมื่อ
-     * // -แก้ไขค่า position   -> ไม่ได้ เพราะจะทำให้ทุกอย่างที่ปรับตำแหน่งเต่าทีละนิด มีปัญหาหมด
+     * -แก้ไขค่า Position
      * -ยกปากกา
      */
     public void Fill(Color color)
     {
         form.QueueAndWait(new Fill(this, path, color));
     }
+    public void PenUp() { PenOn = false; }
+    public void PenDown() { PenOn = true; }
 }
