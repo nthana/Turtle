@@ -164,8 +164,6 @@ internal static class Program
 
         Position = new Vector2(-100, -100);
         Direction = -90;
-        PenOn = false;
-        PenOn = true;
         Forward(100);
         ArcLeft(100, 90);
         Forward(30);

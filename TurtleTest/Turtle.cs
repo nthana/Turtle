@@ -12,7 +12,12 @@ namespace ThanaNita.Turtles;
 
 public class Turtle
 {
-    public Vector2 Position { get => position; set { position = value; } }
+    // set โดยไม่กระทบต่อ path ( don't close figure)
+    internal Vector2 InternalPosition { get => position; set => position = value; }
+    public Vector2 Position { 
+        get => position; 
+        set { CloseFigure(); position = value; } 
+    }
     public float Direction { get; set; } = 90;
     public float Speed { get; set; } = 300f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
     public Color PenColor { get => penColor; set { if (penColor == value) return; penColor = value; ResetPath(); } }
@@ -87,7 +92,7 @@ public class Turtle
 
     /* จุดที่ต่างจาก fill ใน pencilcode
      * - fill จะกินพื้นที่ไปครึ่งหนึ่งของความกว้างของเส้น -> เพื่อความสะดวกในการเขียน   
-     *    - a) และเป็นเพราะ GDI+ คำสั่ง DrawPath มี bug ทำให้หัวเส้นไม่ round ในบางกรณี
+     *    OK: - a) และเป็นเพราะ GDI+ คำสั่ง DrawPath มี bug ทำให้หัวเส้นไม่ round ในบางกรณี
      *    - b) การวาดเส้นด้วย drawpath พบว่าเส้นที่ auto close path จะถูกวาดติดไปด้วย
      *    ถ้าจะแก้ปัญหานี้ ทำโดยเราต้องเก็บทั้ง line และ arc ทั้งหมด แล้วสั่งวาดทั้งหมดใน turn 
      *    - จะแก้ได้ทั้ง bug (a) และทั้งปัญหาเส้นเกิน เวลามีหลาย loop (b)

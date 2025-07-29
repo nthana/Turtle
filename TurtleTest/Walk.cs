@@ -51,7 +51,7 @@ public class Walk : Command
             }
         }
 
-        turtle.Position = position;
+        turtle.InternalPosition = position;
 
         return IsFinished();
     }

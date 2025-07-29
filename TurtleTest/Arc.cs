@@ -99,13 +99,13 @@ public class Arc : Command
         if (turnLeft)
         {
             var directionAsRadian = (turtle.Direction) * MathF.PI / 180;
-            turtle.Position = center - radius * new Vector2(
+            turtle.InternalPosition = center - radius * new Vector2(
                         -MathF.Sin(directionAsRadian), MathF.Cos(directionAsRadian));
         }
         else
         {
             var directionAsRadian = (turtle.Direction) * MathF.PI / 180;
-            turtle.Position = center - radius * new Vector2(
+            turtle.InternalPosition = center - radius * new Vector2(
                         MathF.Sin(directionAsRadian), -MathF.Cos(directionAsRadian));
 
         }
