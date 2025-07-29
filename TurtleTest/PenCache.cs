@@ -18,6 +18,7 @@ public class PenCache
 
         var pen = new Pen(color, size);
         pen.StartCap = System.Drawing.Drawing2D.LineCap.Round;
+        pen.LineJoin = System.Drawing.Drawing2D.LineJoin.Round;
         pen.EndCap = System.Drawing.Drawing2D.LineCap.Round;
         dict.Add(key, pen);
         return pen;

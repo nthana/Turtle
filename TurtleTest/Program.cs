@@ -19,36 +19,59 @@ internal static class Program
         // ถ้า สอง thread ตัว screen น่าจะต้องมีสอง queue ตาม thread
         // ถ้าใช้เต่าตัวเดียวกัน น่าจะมีปัญหา
 
+        GDIDrawPathBug();
         //NewOne();
         //Loops();
         //UseOne();
         //TwoTurtle();
-        TestArc();
+        //TestArc();
+    }
+
+    static void GDIDrawPathBug()
+    {
+        var t1 = new Turtle();
+
+        t1.PenSize = 20;
+        t1.PenColor = Color.Blue;
+        t1.TurnRight(30);
+        t1.Forward(300);
+        t1.TurnLeft(120);
+        t1.Forward(300);
+        t1.TurnLeft(120);
+        t1.Forward(300);
+        t1.Fill(Color.Green);
     }
 
     static void NewOne()
     {
         var t1 = new Turtle();
 
-        t1.PenColor = Color.Red;
-        t1.TurnRight(30);
-        t1.Forward(300);
-        t1.Dot(Color.Red);
-        Debug.WriteLine(t1.Position);
-
+        t1.PenSize = 20;
         t1.PenColor = Color.Blue;
-        t1.TurnLeft(120);
-        t1.Forward(300);
-        Debug.WriteLine(t1.Position);
-
-        t1.PenColor = Color.Green;
-        t1.TurnLeft(120);
-        t1.Forward(300);
-        Debug.WriteLine(t1.Position);
-
-        t1.PenColor = Color.Yellow;
         t1.TurnRight(30);
+/*        t1.Forward(300);
+        //t1.Dot(Color.Red);
+        //Debug.WriteLine(t1.Position);
+
+        //t1.PenColor = Color.Blue;
+        t1.TurnLeft(120);
         t1.Forward(300);
+        //Debug.WriteLine(t1.Position);
+
+        //t1.PenColor = Color.Green;
+        t1.TurnLeft(120);
+        t1.Forward(300);
+        //Debug.WriteLine(t1.Position);
+        t1.Fill(Color.Green);*/
+
+        //t1.PenColor = Color.Blue;
+        //t1.TurnRight(0.001f);
+        t1.Forward(300);
+        t1.TurnLeft(120);
+        t1.Forward(300);
+        t1.TurnLeft(120);
+        t1.Forward(300);
+        t1.Fill(Color.Green);
     }
 
     static void Loops()
@@ -99,7 +122,6 @@ internal static class Program
 
     static void TestArc()
     {
-        Speed = 100;
         PenColor = Color.Blue;
         TurnRight(30);
         Forward(100);

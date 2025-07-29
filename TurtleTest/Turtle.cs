@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Numerics;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using TurtleTest;
@@ -13,11 +14,20 @@ public class Turtle
 {
     public Vector2 Position { get; set; }
     public float Direction { get; set; } = 90;
-    public float Speed { get; set; } = 400f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
-    public Color PenColor { get; set; } = Color.Black;
-    public float PenSize { get; set; } = 3;
+    public float Speed { get; set; } = 300f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
+    public Color PenColor { get => penColor; set { if (penColor == value) return; penColor = value; ResetPath(); } }
+    public float PenSize { get => penSize; set { if (penSize == value) return; penSize = value; ResetPath(); } }
     public bool PenOn { get; set; } = true;
     public bool Visible { get; set; } = true;
+
+    private Color penColor = Color.Black;
+    private float penSize = 3;
+
+    private PathBuilder path;
+    private void ResetPath()
+    {
+        path.Reset(penColor, penSize);
+    }
 
     public float DirectionRadian
     {
@@ -30,6 +40,8 @@ public class Turtle
     {
         this.form = form;
         this.form.AddTurtle(this);
+
+        path = new PathBuilder(PenColor, PenSize);
     }
 
     public Turtle()
@@ -39,11 +51,11 @@ public class Turtle
 
     public void Forward(float distant)
     {
-        form.QueueAndWait(new Walk(this, distant));
+        form.QueueAndWait(new Walk(this, distant, path));
     }
     public void Backward(float distant)
     {
-        form.QueueAndWait(new Walk(this, -distant));
+        form.QueueAndWait(new Walk(this, -distant, path));
     }
     public void TurnLeft(float angle)
     {
@@ -64,5 +76,14 @@ public class Turtle
     public void ArcRight(float radius, float angle)
     {
         form.QueueAndWait(new Arc(this, radius, angle, false));
+    }
+
+    /* จุดที่ต่างจาก fill ใน pencilcode
+     * - fill จะกินพื้นที่ไปครึ่งหนึ่งของความกว้างของเส้น -> เพื่อความสะดวกในการเขียน   
+     *    - และเป็นเพราะ GDI+ คำสั่ง DrawPath มี bug ทำให้หัวเส้นไม่ round ในบางกรณี
+     */
+    public void Fill(Color color)
+    {
+        form.QueueAndWait(new Fill(path, color));
     }
 }

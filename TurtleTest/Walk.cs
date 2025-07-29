@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Numerics;
+using TurtleTest;
 
 namespace ThanaNita.Turtles;
 
@@ -13,12 +14,14 @@ public class Walk : Command
     private Vector2 displacement;
     private float endTime;
     private float accumTime = 0;
+    PathBuilder path;
 
     private Turtle turtle;
 
-    public Walk(Turtle turtle, float distant)
+    public Walk(Turtle turtle, float distant, PathBuilder path)
     {
         this.turtle = turtle;
+        this.path = path;
 
         endTime = MathF.Abs(distant) / turtle.Speed;
         startPosition = turtle.Position;
@@ -39,6 +42,8 @@ public class Walk : Command
         {
             var pen = PenCache.Get(turtle.PenColor, turtle.PenSize);
             myBuffer.Graphics.DrawLine(pen, (PointF)turtle.Position, (PointF)position);
+
+            path.AddLine(startPosition, startPosition + displacement);
         }
 
         turtle.Position = position;
