@@ -11,7 +11,7 @@ namespace ThanaNita.Turtles;
 
 public class Arc : Command
 {
-    private float startAngle;
+    private float startAngle; // ทิศของเต่าตอนเริ่มต้น
     private float displacement; // ค่าติดลบ เมื่อเลี้ยวขวา
     private float endTime;
     private float accumTime = 0;
@@ -33,35 +33,28 @@ public class Arc : Command
         this.radius = radius;
         this.path = path;
 
-        float speedCoefficient = 1f;
-        endTime = MathF.Abs(angleDegree) / (turtle.Speed * speedCoefficient);
+        float angleRadian = angleDegree * (MathF.PI / 180);
+        endTime = angleRadian * radius / turtle.Speed;
         startAngle = turtle.Direction;
-        var angleRadian = turtle.DirectionRadian;
 
-        center = CalcCenter(radius, angleRadian);
+        center = CalcCenter(radius, turtle.DirectionRadian);
 
         rect = new RectangleF(
                         (PointF)(center - new Vector2(radius, radius)),
                         new SizeF(radius * 2, radius * 2)
             );
 
-        displacement = angleDegree * (turnLeft ? 1: -1);
+        displacement = angleDegree * Sign();
     }
+
+    private int Sign() => turnLeft ? 1 : -1; // if turn right, return -1
 
     Vector2 CalcCenter(float radius, float angleRadian)
     {
-        Vector2 center;
-        if (turnLeft)
-        {
-            center = turtle.Position + radius * new Vector2(
-                -MathF.Sin(angleRadian), MathF.Cos(angleRadian));
-        }
-        else
-        {
-            center = turtle.Position + radius * new Vector2(
-                MathF.Sin(angleRadian), -MathF.Cos(angleRadian));
-        }
-        return center;
+        return turtle.Position + 
+                radius 
+                * new Vector2(-MathF.Sin(angleRadian), MathF.Cos(angleRadian))
+                * Sign();
     }
 
     public bool Act(float deltaTime, BufferedGraphics myBuffer)
@@ -78,18 +71,11 @@ public class Arc : Command
         if (turtle.PenOn)
         {
             var pen = PenCache.Get(turtle.PenColor, turtle.PenSize);
-
-            if (turnLeft)
-                myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction - 90, direction - turtle.Direction);
-            else
-                myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction + 90, direction - turtle.Direction);
+            myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction - 90 * Sign(), direction - turtle.Direction);
 
             if (neverAct)
             {
-                if (turnLeft)
-                    path.AddArc(rect, startAngle - 90, displacement);
-                else
-                    path.AddArc(rect, startAngle + 90, displacement);
+                path.AddArc(rect, startAngle - 90 * Sign(), displacement); // left -90, right +90
                 neverAct = false;
             }
         }
@@ -97,20 +83,9 @@ public class Arc : Command
         turtle.Direction = direction;
 
         //set turtle position
-        if (turnLeft)
-        {
-            var directionAsRadian = (turtle.Direction) * MathF.PI / 180;
-            turtle.InternalPosition = center - radius * new Vector2(
-                        -MathF.Sin(directionAsRadian), MathF.Cos(directionAsRadian));
-        }
-        else
-        {
-            var directionAsRadian = (turtle.Direction) * MathF.PI / 180;
-            turtle.InternalPosition = center - radius * new Vector2(
-                        MathF.Sin(directionAsRadian), -MathF.Cos(directionAsRadian));
-
-        }
-
+        var turtleAsRadian = (turtle.Direction) * MathF.PI / 180;
+        turtle.InternalPosition = 
+            center - radius * Sign() * new Vector2(-MathF.Sin(turtleAsRadian), MathF.Cos(turtleAsRadian));
 
         return IsFinished();
     }

@@ -77,9 +77,9 @@ internal static class Program
     static void Loops()
     {
         //Visible = false;
-        Speed = 999;
+        Speed = 99999;
         PenColor = Color.Blue;
-        for (int i = 0; i < 25; ++i)
+        for (int i = 0; i < 250; ++i)
         {
             Forward(200);
             TurnRight(88);
@@ -124,14 +124,14 @@ internal static class Program
 
     static void TestArc()
     {
-        //Speed = 99;
+        //Speed = 9999;
         Position = new Vector2(0, 0);
         Direction = 90;
         PenColor = Color.Blue;
         //TurnRight(30);
         Forward(100);
         ArcLeft(100, 90+30+180); // radius and angle
-        //Fill(Color.Yellow);
+        Fill(Color.Yellow);
 
         Position = new Vector2(0, 0);
         Direction = 90;
@@ -143,7 +143,7 @@ internal static class Program
         TurnRight(30);
         Backward(400);
 
-        //Fill(Color.Green);
+        Fill(Color.Green);
     }
     static void TestFill()
     {
