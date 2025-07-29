@@ -17,6 +17,7 @@ public static class One
     public static bool Visible { get { return Turtle.Visible; } set { Turtle.Visible = value; } }
     public static bool PenOn { get { return Turtle.PenOn; } set { Turtle.PenOn = value; } }
     public static Color PenColor { get { return Turtle.PenColor; } set { Turtle.PenColor = value; } }
+    public static float PenSize { get { return Turtle.PenSize; } set { Turtle.PenSize = value; } }
     public static Vector2 Position { get { return Turtle.Position; } set { Turtle.Position = value; } }
     public static float Speed { get { return Turtle.Speed; } set { Turtle.Speed = value; } }
 
@@ -45,5 +46,9 @@ public static class One
     public static void ArcRight(float radius, float angle)
     {
         Turtle.ArcRight(radius, angle);
+    }
+    public static void Fill(Color color)
+    {
+        Turtle.Fill(color);
     }
 }

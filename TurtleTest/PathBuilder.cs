@@ -28,6 +28,11 @@ namespace TurtleTest
             LineSize = lineSize;
         }
 
+        public void CloseFigure()
+        {
+            path.CloseFigure();
+        }
+
         public GraphicsPath GetPathAndReset()
         {
             var oldPath = path;

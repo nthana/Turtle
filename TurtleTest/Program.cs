@@ -19,27 +19,26 @@ internal static class Program
         // ถ้า สอง thread ตัว screen น่าจะต้องมีสอง queue ตาม thread
         // ถ้าใช้เต่าตัวเดียวกัน น่าจะมีปัญหา
 
-        GDIDrawPathBug();
+        //GDIDrawPathBug();
         //NewOne();
         //Loops();
         //UseOne();
         //TwoTurtle();
         //TestArc();
+        TestFill();
     }
 
     static void GDIDrawPathBug()
     {
-        var t1 = new Turtle();
-
-        t1.PenSize = 20;
-        t1.PenColor = Color.Blue;
-        t1.TurnRight(30);
-        t1.Forward(300);
-        t1.TurnLeft(120);
-        t1.Forward(300);
-        t1.TurnLeft(120);
-        t1.Forward(300);
-        t1.Fill(Color.Green);
+        PenSize = 10;
+        PenColor = Color.Blue;
+        TurnRight(30);
+        Forward(300);
+        TurnLeft(120);
+        Forward(300);
+        TurnLeft(120);
+        Forward(300);
+        Fill(Color.Green);
     }
 
     static void NewOne()
@@ -49,7 +48,7 @@ internal static class Program
         t1.PenSize = 20;
         t1.PenColor = Color.Blue;
         t1.TurnRight(30);
-/*        t1.Forward(300);
+        t1.Forward(300);
         //t1.Dot(Color.Red);
         //Debug.WriteLine(t1.Position);
 
@@ -62,7 +61,7 @@ internal static class Program
         t1.TurnLeft(120);
         t1.Forward(300);
         //Debug.WriteLine(t1.Position);
-        t1.Fill(Color.Green);*/
+        //t1.Fill(Color.Green);
 
         //t1.PenColor = Color.Blue;
         //t1.TurnRight(0.001f);
@@ -77,12 +76,14 @@ internal static class Program
     static void Loops()
     {
         //Visible = false;
+        Speed = 999999;
         PenColor = Color.Blue;
-        for (int i = 0; i < 25; ++i)
+        for (int i = 0; i < 250; ++i)
         {
             Forward(200);
             TurnRight(88);
         }
+        Fill(Color.Yellow);
     }
 
     static void UseOne()
@@ -135,5 +136,39 @@ internal static class Program
         ArcRight(100, 90 + 30 + 180); // radius and angle
         Forward(200);
         Backward(400);
+
+        Fill(Color.Green);
+    }
+    static void TestFill()
+    {
+        PenColor = Color.Blue;
+        TurnRight(30);
+        Forward(100);
+        //ArcLeft(100, 90 + 30 + 180); // radius and angle
+
+        TurnRight(120);
+        Forward(100);
+        TurnLeft(120);
+        //ArcRight(100, 90 + 30 + 180); // radius and angle
+        Forward(100);
+        //Backward(400);
+
+        PenOn = false;
+        Forward(30);
+        PenOn = true;
+        Forward(100);
+        TurnRight(120);
+        Forward(100);
+        TurnRight(120);
+
+        Position = new Vector2(-100, -100);
+        Direction = -90;
+        PenOn = false;
+        PenOn = true;
+        Forward(100);
+        ArcLeft(100, 90);
+        Forward(30);
+
+        Fill(Color.Yellow);
     }
 }

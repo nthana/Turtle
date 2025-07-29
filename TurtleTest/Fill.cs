@@ -29,8 +29,8 @@ public class Fill : Command
         SolidBrush brush = new SolidBrush(fillColor);
         myBuffer.Graphics.FillPath(brush, path);
 
-        Pen pen = PenCache.Get(lineColor, lineSize);
-        myBuffer.Graphics.DrawPath(pen, path);
+        //Pen pen = PenCache.Get(lineColor, lineSize);
+        //myBuffer.Graphics.DrawPath(pen, path);
 
         finished = true;
         return IsFinished();

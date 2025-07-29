@@ -12,18 +12,25 @@ namespace ThanaNita.Turtles;
 
 public class Turtle
 {
-    public Vector2 Position { get; set; }
+    public Vector2 Position { get => position; set { position = value; } }
     public float Direction { get; set; } = 90;
     public float Speed { get; set; } = 300f; // ห้าม <= 0; ถ้าเป็น 9999 ขึ้นไป ถือเป็น infinity
     public Color PenColor { get => penColor; set { if (penColor == value) return; penColor = value; ResetPath(); } }
     public float PenSize { get => penSize; set { if (penSize == value) return; penSize = value; ResetPath(); } }
-    public bool PenOn { get; set; } = true;
+    public bool PenOn { get => penOn; set { if (value == false) CloseFigure(); penOn = value; } }
     public bool Visible { get; set; } = true;
 
+    private Vector2 position;
     private Color penColor = Color.Black;
     private float penSize = 3;
+    private bool penOn = true;
 
     private PathBuilder path;
+
+    private void CloseFigure()
+    {
+        path.CloseFigure();
+    }
     private void ResetPath()
     {
         path.Reset(penColor, penSize);
@@ -80,7 +87,18 @@ public class Turtle
 
     /* จุดที่ต่างจาก fill ใน pencilcode
      * - fill จะกินพื้นที่ไปครึ่งหนึ่งของความกว้างของเส้น -> เพื่อความสะดวกในการเขียน   
-     *    - และเป็นเพราะ GDI+ คำสั่ง DrawPath มี bug ทำให้หัวเส้นไม่ round ในบางกรณี
+     *    - a) และเป็นเพราะ GDI+ คำสั่ง DrawPath มี bug ทำให้หัวเส้นไม่ round ในบางกรณี
+     *    - b) การวาดเส้นด้วย drawpath พบว่าเส้นที่ auto close path จะถูกวาดติดไปด้วย
+     *    ถ้าจะแก้ปัญหานี้ ทำโดยเราต้องเก็บทั้ง line และ arc ทั้งหมด แล้วสั่งวาดทั้งหมดใน turn 
+     * //- การ reset fill จะเกิดขึ้นเมื่อยกปากกาด้วย
+     *   // - เพื่อให้ path object ไม่ใหญ่เกินไป ?
+     *   
+     * path object จะถูกเคลียร์เมื่อ
+     * -เรียก fill แต่ละครั้ง 
+     *
+     * figure จะถูก close เมื่อ
+     * // -แก้ไขค่า position   -> ไม่ได้ เพราะจะทำให้ทุกอย่างที่ปรับตำแหน่งเต่าทีละนิด มีปัญหาหมด
+     * -ยกปากกา
      */
     public void Fill(Color color)
     {
