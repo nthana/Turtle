@@ -24,8 +24,8 @@ internal static class Program
         //Loops();
         //UseOne();
         //TwoTurtle();
-        //TestArc();
-        TestFill();
+        TestArc();
+        //TestFill();
     }
 
     // สรุปว่าจริงๆ ไม่มี bug แล้ว bug เกิดจากเราที่ add line ใน path ซ้ำๆ มากเกินไป
@@ -77,9 +77,9 @@ internal static class Program
     static void Loops()
     {
         //Visible = false;
-        Speed = 999999;
+        Speed = 999;
         PenColor = Color.Blue;
-        for (int i = 0; i < 250; ++i)
+        for (int i = 0; i < 25; ++i)
         {
             Forward(200);
             TurnRight(88);
@@ -124,10 +124,14 @@ internal static class Program
 
     static void TestArc()
     {
+        //Speed = 99;
+        Position = new Vector2(0, 0);
+        Direction = 90;
         PenColor = Color.Blue;
-        TurnRight(30);
+        //TurnRight(30);
         Forward(100);
         ArcLeft(100, 90+30+180); // radius and angle
+        //Fill(Color.Yellow);
 
         Position = new Vector2(0, 0);
         Direction = 90;
@@ -136,9 +140,10 @@ internal static class Program
         Forward(100);
         ArcRight(100, 90 + 30 + 180); // radius and angle
         Forward(200);
+        TurnRight(30);
         Backward(400);
 
-        Fill(Color.Green);
+        //Fill(Color.Green);
     }
     static void TestFill()
     {

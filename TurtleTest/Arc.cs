@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -11,7 +12,7 @@ namespace ThanaNita.Turtles;
 public class Arc : Command
 {
     private float startAngle;
-    private float displacement;
+    private float displacement; // ค่าติดลบ เมื่อเลี้ยวขวา
     private float endTime;
     private float accumTime = 0;
     private RectangleF rect;
@@ -66,10 +67,13 @@ public class Arc : Command
     public bool Act(float deltaTime, BufferedGraphics myBuffer)
     {
         accumTime += deltaTime;
-        if(accumTime > endTime)
+        Debug.WriteLine(accumTime);
+
+        float direction;
+        if (accumTime > endTime)
             accumTime = endTime;
 
-        var direction = startAngle + displacement * (accumTime / endTime);
+        direction = startAngle + displacement * (accumTime / endTime);
 
         if (turtle.PenOn)
         {
@@ -78,18 +82,15 @@ public class Arc : Command
             if (turnLeft)
                 myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction - 90, direction - turtle.Direction);
             else
-            {
-                float sweep = turtle.Direction - direction;
-                myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction + 90 - sweep, sweep);
-            }
+                myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction + 90, direction - turtle.Direction);
 
             if (neverAct)
             {
                 if (turnLeft)
-                    path.AddArc(rect, startAngle-90, displacement);
+                    path.AddArc(rect, startAngle - 90, displacement);
                 else
-                    path.AddArc(rect, direction+90, displacement);
-                    neverAct = false;
+                    path.AddArc(rect, startAngle + 90, displacement);
+                neverAct = false;
             }
         }
 

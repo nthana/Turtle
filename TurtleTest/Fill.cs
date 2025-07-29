@@ -31,11 +31,9 @@ public class Fill : Command
     public bool Act(float deltaTime, BufferedGraphics myBuffer)
     {
         SolidBrush brush = new SolidBrush(fillColor);
-        //myBuffer.Graphics.FillPath(brush, path);
         pathBuilder.GraphicsFillPath(myBuffer.Graphics, brush);
 
         Pen pen = PenCache.Get(lineColor, lineSize);
-        //myBuffer.Graphics.DrawPath(pen, path);
         pathBuilder.GraphicsDrawPath(myBuffer.Graphics, pen);
 
         pathBuilder.Reset(turtle.PenColor, turtle.PenSize);

@@ -55,3 +55,6 @@ t1.fd(400);*/
      * ยังไม่ทำ //- การ reset fill จะเกิดขึ้นเมื่อยกปากกาด้วย
      *   // - เพื่อให้ path object ไม่ใหญ่เกินไป ?
 */
+
+//float sweep = turtle.Direction - direction;
+//myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction + 90 - sweep, sweep);
