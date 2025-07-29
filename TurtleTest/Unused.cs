@@ -37,3 +37,10 @@ t1.fd(400);*/
 //var pen = new Pen(Color.Blue, 15);
 //buffer.Graphics.DrawEllipse(pen, this.DisplayRectangle);
 
+
+/*        public GraphicsPath GetPath()
+        {
+            var oldPath = path;
+            //Reset(LineColor, LineSize);
+            return oldPath;
+        }*/

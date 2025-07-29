@@ -11,7 +11,7 @@ namespace TurtleTest
     // Path can keep only 1 color and 1 line size
     public class PathBuilder
     {
-        GraphicsPath path;
+        List<GraphicsPath> path = new List<GraphicsPath>();
         public Color LineColor { get; private set; }
         public float LineSize { get; private set; }
 
@@ -22,41 +22,38 @@ namespace TurtleTest
 
         public void Reset(Color lineColor, float lineSize)
         {
-            path = new GraphicsPath();
-            path.Reset();
+            path.Clear();
+            path.Add(new GraphicsPath()); // จะมี 1 ตัวเตรียมไว้ก่อนเสมอ
             LineColor = lineColor;
             LineSize = lineSize;
         }
 
-        public void CloseFigure()
-        {
-            path.CloseFigure();
-        }
+        private GraphicsPath ActivePath => path[path.Count - 1];
 
-/*        public GraphicsPath GetPath()
+        public void CloseFigure() // จะต้องสร้าง path ใหม่
         {
-            var oldPath = path;
-            //Reset(LineColor, LineSize);
-            return oldPath;
-        }*/
+            path.Add(new GraphicsPath());
+        }
 
         public void GraphicsFillPath(Graphics g, Brush brush)
         {
-            g.FillPath(brush, path);
+            for(int i=0; i<path.Count; i++)
+                g.FillPath(brush, path[i]);
         }
         public void GraphicsDrawPath(Graphics g, Pen pen)
         {
-            g.DrawPath(pen, path);
+            for (int i = 0; i < path.Count; i++)
+                g.DrawPath(pen, path[i]);
         }
 
         public void AddLine(Vector2 point1, Vector2 point2)
         {
-            path.AddLine(point1.X, point1.Y, point2.X, point2.Y);
+            ActivePath.AddLine(point1.X, point1.Y, point2.X, point2.Y);
         }
 
         public void AddArc(RectangleF rect, float startAngle, float sweep)
         {
-            path.AddArc(rect, startAngle, sweep);
+            ActivePath.AddArc(rect, startAngle, sweep);
         }
     }
 }
