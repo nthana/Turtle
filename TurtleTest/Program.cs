@@ -21,10 +21,10 @@ internal static class Program
 
         //GDIDrawPathBug();
         //NewOne();
-        //Loops();
+        Loops();
         //UseOne();
         //TwoTurtle();
-        TestArc();
+        //TestArc();
         //TestFill();
     }
 
@@ -77,9 +77,9 @@ internal static class Program
     static void Loops()
     {
         //Visible = false;
-        Speed = 99999;
+        Speed = 999;
         PenColor = Color.Blue;
-        for (int i = 0; i < 250; ++i)
+        for (int i = 0; i < 40; ++i)
         {
             Forward(200);
             TurnRight(88);

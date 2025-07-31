@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TurtleTest.Properties {
+namespace ThanaNita.Turtles.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace TurtleTest.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("TurtleTest.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("ThanaNita.Turtles.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,9 +63,9 @@ namespace TurtleTest.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap turtle {
+        internal static System.Drawing.Bitmap TurtleImage {
             get {
-                object obj = ResourceManager.GetObject("turtle", resourceCulture);
+                object obj = ResourceManager.GetObject("TurtleImage", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

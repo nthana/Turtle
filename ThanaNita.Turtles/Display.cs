@@ -65,7 +65,7 @@ public partial class Display : Form
 
         startedEvent.Set();
 
-        turtleImage = TurtleTest.Properties.Resources.turtle; //Image.FromFile("turtle.png");
+        turtleImage = ThanaNita.Turtles.Properties.Resources.TurtleImage; //Image.FromFile("turtle.png");
 
         Debug.WriteLine(ClientSize);
         Debug.WriteLine(DisplayRectangle);
