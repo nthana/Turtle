@@ -8,6 +8,19 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Version>0.8.0</Version>
+    <Authors>Thana Nitayarerk</Authors>
+    <Description>Turtle Graphics for .Net (by Thana) implemented using Windows Forms and GDI+.</Description>
+    <Title>Turtle Graphics for .Net (by Thana)</Title>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageTags>Turtle, Graphics, Vector, GDI+, Windows Forms</PackageTags>
+    <PackageReleaseNotes>First &amp; Test Version.</PackageReleaseNotes>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <Copyright>Copyright (c) Thana Nitayarerk 2025</Copyright>
+    <RepositoryUrl>https://github.com/nthana/Turtle</RepositoryUrl>
+  </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Unused.cs" />
   </ItemGroup>
@@ -25,6 +38,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +50,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
   </ItemGroup>
 
 </Project>

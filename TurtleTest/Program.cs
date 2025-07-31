@@ -77,8 +77,8 @@ internal static class Program
     static void Loops()
     {
         //Visible = false;
-        Speed = 999;
-        PenColor = Color.Blue;
+        Speed = 400;
+        PenColor = Color.Green;
         for (int i = 0; i < 40; ++i)
         {
             Forward(200);
