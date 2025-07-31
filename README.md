@@ -1,3 +1,4 @@
+Can be installed from NuGet: ThanaNita.Turtles
 
 Example Code:
 
