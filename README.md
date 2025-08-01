@@ -1,7 +1,8 @@
-Can be installed from NuGet: ThanaNita.Turtles
+Can be installed from NuGet: **ThanaNita.Turtles**
 
 Example:
-<img width="370" height="392" alt="image" src="https://github.com/user-attachments/assets/b124c91c-410a-437e-b8a7-b47908e3a0aa" />
+
+<img width="418" height="423" alt="image" src="https://github.com/user-attachments/assets/d8f37009-47a5-4883-87db-17ddc2f6b6be" />
 
 Example Code:
 ```
