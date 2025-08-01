@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace ThanaNita.Turtles;
 
-public class Dot : Command
+internal class Dot : Command
 {
     private Turtle turtle;
     Color color;

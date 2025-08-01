@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace ThanaNita.Turtles;
 
-public class Turn : Command
+internal class Turn : Command
 {
     private float startPosition;
     private float displacement;

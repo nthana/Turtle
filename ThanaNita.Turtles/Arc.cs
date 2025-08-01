@@ -9,7 +9,7 @@ using TurtleTest;
 
 namespace ThanaNita.Turtles;
 
-public class Arc : Command
+internal class Arc : Command
 {
     private float startAngle; // ทิศของเต่าตอนเริ่มต้น
     private float displacement; // ค่าติดลบ เมื่อเลี้ยวขวา

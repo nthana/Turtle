@@ -9,7 +9,7 @@ using TurtleTest;
 
 namespace ThanaNita.Turtles;
 
-public class Fill : Command
+internal class Fill : Command
 {
     Turtle turtle;
     PathBuilder pathBuilder;
