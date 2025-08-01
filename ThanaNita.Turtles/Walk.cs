@@ -37,7 +37,8 @@ public class Walk : Command
             accumTime = endTime;
 
         // todo: recheck rounding error
-        var position = startPosition + displacement * (accumTime/endTime);
+        float interpolation = endTime != 0 ? (accumTime / endTime) : 1;
+        var position = startPosition + displacement * interpolation;
 
         if (turtle.PenOn)
         {

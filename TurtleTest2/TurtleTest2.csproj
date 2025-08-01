@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ThanaNita.Turtles\ThanaNita.Turtles.csproj" />
+    <PackageReference Include="ThanaNita.Turtles" Version="0.8.2" />
   </ItemGroup>
 
 </Project>

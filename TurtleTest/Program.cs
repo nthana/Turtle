@@ -13,15 +13,15 @@ internal static class Program
     {
         // To customize application configuration such as set high DPI settings or default font,
         // see https://aka.ms/applicationconfiguration.
-        ApplicationConfiguration.Initialize();
+        //ApplicationConfiguration.Initialize();
 
         // ถ้า thread หนึ่งมีเต่าสองตัว ก็ทำได้ จะเคลื่อนทีละตัว ไม่พร้อมกัน
         // ถ้า สอง thread ตัว screen น่าจะต้องมีสอง queue ตาม thread
         // ถ้าใช้เต่าตัวเดียวกัน น่าจะมีปัญหา
 
         //GDIDrawPathBug();
-        //Empty();
-        NewOne();
+        Empty();
+        //NewOne();
         //Loops();
         //UseOne();
         //TwoTurtle();
@@ -45,7 +45,9 @@ internal static class Program
 
     static void Empty()
     {
-        TurnRight(1);
+        //TurnRight(0);
+        //Forward(0);
+        //ArcRight(100, 0);
     }
 
     static void NewOne()

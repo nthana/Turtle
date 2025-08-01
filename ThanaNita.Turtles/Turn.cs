@@ -34,7 +34,8 @@ public class Turn : Command
         if(accumTime > endTime)
             accumTime = endTime;
 
-        var direction = startPosition + displacement * (accumTime/endTime);
+        float interpolation = endTime != 0 ? (accumTime / endTime) : 1;
+        float direction = startPosition + displacement * interpolation;
 
         turtle.Direction = direction;
 

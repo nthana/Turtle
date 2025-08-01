@@ -27,6 +27,14 @@ public class Arc : Command
 
     public Arc(Turtle turtle, float radius, float angleDegree, bool turnLeft, PathBuilder path)
     {
+        // swap Left & Right if radius is negative
+        if(radius < 0)
+        {
+            radius = -radius;
+            turnLeft = !turnLeft;
+        }
+        if (radius == 0)
+            throw new Exception("Arc cannot have zero radius (radius = 0).");
 
         this.turtle = turtle;
         this.turnLeft = turnLeft;
@@ -60,13 +68,13 @@ public class Arc : Command
     public bool Act(float deltaTime, BufferedGraphics myBuffer)
     {
         accumTime += deltaTime;
-        Debug.WriteLine(accumTime);
 
         float direction;
         if (accumTime > endTime)
             accumTime = endTime;
 
-        direction = startAngle + displacement * (accumTime / endTime);
+        float interpolation = endTime != 0 ? (accumTime / endTime) : 1;
+        direction = startAngle + displacement * interpolation;
 
         if (turtle.PenOn)
         {
