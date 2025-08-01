@@ -13,6 +13,7 @@ public class StaticDisplay
     {
         get
         {
+            MyAppConfig.Initialize();
             if (_value == null)
                 _value = Display.CreateUIThread();
 

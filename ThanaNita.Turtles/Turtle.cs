@@ -48,7 +48,7 @@ public class Turtle
     }
 
     private Display form;
-    public Turtle(Display form)
+    private Turtle(Display form)
     {
         this.form = form;
         this.form.AddTurtle(this);

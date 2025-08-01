@@ -65,11 +65,12 @@ public partial class Display : Form
 
         startedEvent.Set();
 
-        turtleImage = ThanaNita.Turtles.Properties.Resources.TurtleImage; //Image.FromFile("turtle.png");
+        turtleImage = ThanaNita.Turtles.Properties.Resources.TurtleImage; 
+                    //Image.FromFile("turtle.png");
 
-        Debug.WriteLine(ClientSize);
-        Debug.WriteLine(DisplayRectangle);
-        Debug.WriteLine(Screen.PrimaryScreen?.Bounds.Size.Width);
+        //Debug.WriteLine(ClientSize);
+        //Debug.WriteLine(DisplayRectangle);
+        //Debug.WriteLine(Screen.PrimaryScreen?.Bounds.Size.Width);
     }
 
     private void SetWindowPosition()
@@ -189,7 +190,7 @@ public partial class Display : Form
         g.TranslateTransform(turtle.Position.X, turtle.Position.Y, MatrixOrder.Append);
         TransformToCenter(g, center);
 
-        g.DrawImage(turtleImage, 0, 0);
+        g.DrawImage(turtleImage, 0, 0, turtleImage.Width, turtleImage.Height);
 
         //g.DrawImage(turtleImage, turtle.Position.X - size.Width / 2, turtle.Position.Y - size.Height / 2);
 

@@ -9,13 +9,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.8.0</Version>
+    <Version>0.8.2</Version>
     <Authors>Thana Nitayarerk</Authors>
-    <Description>Turtle Graphics for .Net (by Thana) implemented using Windows Forms and GDI+.</Description>
+    <Description>Turtle Graphics for .Net, implemented using Windows Forms and GDI+. This aims to use in education to learn C# with fun.</Description>
     <Title>Turtle Graphics for .Net (by Thana)</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageTags>Turtle, Graphics, Vector, GDI+, Windows Forms</PackageTags>
-    <PackageReleaseNotes>First &amp; Test Version.</PackageReleaseNotes>
+    <PackageTags>Turtle, Graphics, Windows Forms, GDI+</PackageTags>
+    <PackageReleaseNotes>Fix bug: Call MyAppConfig to ignore DPI.</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright (c) Thana Nitayarerk 2025</Copyright>
     <RepositoryUrl>https://github.com/nthana/Turtle</RepositoryUrl>

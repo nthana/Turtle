@@ -32,8 +32,7 @@ partial class Display
         // 
         // Display
         // 
-        AutoScaleDimensions = new SizeF(10F, 25F);
-        AutoScaleMode = AutoScaleMode.Font;
+        AutoScaleMode = AutoScaleMode.None;
         BackColor = Color.White;
         ClientSize = new Size(828, 944);
         FormBorderStyle = FormBorderStyle.FixedSingle;

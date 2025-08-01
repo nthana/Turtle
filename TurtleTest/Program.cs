@@ -20,8 +20,9 @@ internal static class Program
         // ถ้าใช้เต่าตัวเดียวกัน น่าจะมีปัญหา
 
         //GDIDrawPathBug();
-        //NewOne();
-        Loops();
+        //Empty();
+        NewOne();
+        //Loops();
         //UseOne();
         //TwoTurtle();
         //TestArc();
@@ -40,6 +41,11 @@ internal static class Program
         TurnLeft(120);
         Forward(300);
         Fill(Color.Green);
+    }
+
+    static void Empty()
+    {
+        TurnRight(1);
     }
 
     static void NewOne()
@@ -85,6 +91,8 @@ internal static class Program
             TurnRight(88);
         }
         Fill(Color.Yellow);
+
+        Debug.WriteLine(Direction);
     }
 
     static void UseOne()

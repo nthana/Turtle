@@ -58,3 +58,25 @@ t1.fd(400);*/
 
 //float sweep = turtle.Direction - direction;
 //myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction + 90 - sweep, sweep);
+
+
+/*
+internal static partial class ApplicationConfiguration
+{
+    /// <summary>
+    ///  Bootstrap the application as follows:
+    ///  <code>
+    ///  global::System.Windows.Forms.Application.EnableVisualStyles();
+    ///  global::System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+    ///  global::System.Windows.Forms.Application.SetHighDpiMode(HighDpiMode.SystemAware);
+    /// </code>
+    /// </summary>
+    public static void Initialize()
+    {
+        global::System.Windows.Forms.Application.EnableVisualStyles();
+        global::System.Windows.Forms.Application.SetCompatibleTextRenderingDefault(false);
+        global::System.Windows.Forms.Application.SetHighDpiMode(HighDpiMode.SystemAware);
+    }
+}
+
+ */
