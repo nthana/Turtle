@@ -31,13 +31,13 @@ public static class One
     {
         Turtle.Backward(distant);
     }
-    public static void TurnRight(float angle)
-    {
-        Turtle.TurnRight(angle);
-    }
     public static void TurnLeft(float angle)
     {
         Turtle.TurnLeft(angle);
+    }
+    public static void TurnRight(float angle)
+    {
+        Turtle.TurnRight(angle);
     }
     public static void ArcLeft(float radius, float angle)
     {
@@ -47,8 +47,19 @@ public static class One
     {
         Turtle.ArcRight(radius, angle);
     }
+    public static void Dot(Color color, float diameter = 10)
+    {
+        Turtle.Dot(color, diameter);
+    }
     public static void Fill(Color color)
     {
         Turtle.Fill(color);
     }
+    public static void PenUp() { Turtle.PenUp(); }
+    public static void PenDown() { Turtle.PenDown(); }
+    public static void HideTurtle() { Turtle.HideTurtle(); }
+    public static void ShowTurtle() { Turtle.ShowTurtle(); }
+    public static void SetPenSize(float size) { Turtle.SetPenSize(size); }
+    public static void SetPenColor(Color color) { Turtle.SetPenColor(color); }
+    public static void SetSpeed(float speed) { Turtle.SetSpeed(speed); }
 }

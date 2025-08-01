@@ -9,16 +9,17 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.8.3</Version>
+    <Version>0.8.4</Version>
     <Authors>Thana Nitayarerk</Authors>
     <Description>Turtle Graphics for .Net, implemented using Windows Forms and GDI+. This aims to use in education to learn C# with fun.</Description>
     <Title>Turtle Graphics for .Net (by Thana)</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>Turtle, Graphics, Windows Forms, GDI+</PackageTags>
-    <PackageReleaseNotes>Fix bug: Turn angle and walk distant can be zero.</PackageReleaseNotes>
+    <PackageReleaseNotes>Add many commands</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright (c) Thana Nitayarerk 2025</Copyright>
     <RepositoryUrl>https://github.com/nthana/Turtle</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
@@ -27,6 +28,7 @@
 
   <ItemGroup>
     <None Include="Unused.cs" />
+    <None Include="../README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 
   <ItemGroup>

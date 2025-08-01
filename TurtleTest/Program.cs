@@ -48,6 +48,23 @@ internal static class Program
         //TurnRight(0);
         //Forward(0);
         //ArcRight(100, 0);
+        Position = new Vector2(-300, 0);
+        PenColor = Color.Red;
+        Rect(50);
+        Rect(100);
+        Rect(200);
+    }
+
+    static void Rect(float length)
+    {
+        Forward(length);
+        TurnRight(90);
+        Forward(length);
+        TurnRight(90);
+        Forward(length);
+        TurnRight(90);
+        Forward(length);
+        TurnRight(90);
     }
 
     static void NewOne()
