@@ -41,10 +41,32 @@ Fill(Color.Yellow);
 ```
 
 ## Classes:
-One : static class contains a default turtle (using lazy creation).
-Turtle : can be instantiated more than one turtle.
-Display : a window form created when the first turtle was created.
+### One
+A static class containing a default turtle (using lazy creation)
+### Turtle
+Can be instantiated more than one turtle.
+### Display
+A window form created when the first turtle was created.
 
+## Usages
+### Static Using the One class
+```
+using static ThanaNita.Turtles.One;
+Forward(200);
+```
+
+### Explicitly specify the One class
+```
+using ThanaNita.Turtles;
+One.Forward(200);
+```
+
+### Manually created a turtle
+```
+using ThanaNita.Turtles;
+var t = new Turtle();
+t.Forward(200);
+```
 
 ## All Turtle Commands:
 - Forward / Backward(distance)   	// receive distance in pixel
