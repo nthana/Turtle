@@ -40,13 +40,13 @@ for (int i = 0; i < 20; ++i)
 Fill(Color.Yellow);
 ```
 
-Classes:
+## Classes:
 One : static class contains a default turtle (using lazy creation).
 Turtle : can be instantiated more than one turtle.
 Display : a window form created when the first turtle was created.
 
 
-All Turtle Commands:
+## All Turtle Commands:
 - Forward / Backward(distance)   	// receive distance in pixel
 - TurnLeft / TurnRight(angle)      	// receive angle in degree
 - ArcLeft / ArcRight(radius, angle)	// radius in pixel, angle in degree
@@ -59,7 +59,7 @@ All Turtle Commands:
 - SetPenSize(size)
 - HideTurtle() / ShowTurtle()
 
-All Turtle Properties:
+## All Turtle Properties:
 - Position
 - Direction
 - PenOn
@@ -67,3 +67,12 @@ All Turtle Properties:
 - PenColor
 - PenSize
 - Visible
+
+## A Note on "Fill" command:
+- A path was memorized while using Forward/Backward/ArcLeft/ArcRight
+- That memorized path will be used when the "Fill" command was called.
+- The path lines will be auto redrawn again after the fill occur.
+- The path will be auto-reset when:
+    1. pen size was changed.
+    2. pen color was changed.
+(To make the behavior the same as PencilCode. And it's easier to implement.)
