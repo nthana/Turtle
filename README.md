@@ -39,3 +39,31 @@ for (int i = 0; i < 20; ++i)
 }
 Fill(Color.Yellow);
 ```
+
+Classes:
+One : static class contains a default turtle (using lazy creation).
+Turtle : can be instantiated more than one turtle.
+Display : a window form created when the first turtle was created.
+
+
+All Turtle Commands:
+- Forward / Backward(distance)   	// receive distance in pixel
+- TurnLeft / TurnRight(angle)      	// receive angle in degree
+- ArcLeft / ArcRight(radius, angle)	// radius in pixel, angle in degree
+- Dot(color, diameter)
+- Fill(color)
+- PenUp() / PenDown()
+
+- SetSpeed(speed)
+- SetPenColor(color)
+- SetPenSize(size)
+- HideTurtle() / ShowTurtle()
+
+All Turtle Properties:
+- Position
+- Direction
+- PenOn
+- Speed
+- PenColor
+- PenSize
+- Visible
