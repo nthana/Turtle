@@ -44,22 +44,26 @@ Fill(Color.Yellow);
 ### One
 A static class containing a default turtle (using lazy creation)
 ### Turtle
-Can be instantiated more than one turtle.
+The essential class. Can be used to instantiate more than one turtle.
+Normally, will be used indirectly from the One class.
 ### Display
-A window form created when the first turtle was created.
+A window form created automatically when the first turtle was created.
 
 ## Usages
-### Static Using the One class
+There are three different ways to use this package.
+### A. Static using the One class
 ```
 using static ThanaNita.Turtles.One;
 Forward(200);
 ```
+This usage method is short and easy to write.
 
-### Explicitly specify the One class
+### B. Explicitly specify the One class
 ```
 using ThanaNita.Turtles;
 One.Forward(200);
 ```
+This is more explicit version of the first usage.
 
 ### Manually created a turtle
 ```
@@ -67,6 +71,7 @@ using ThanaNita.Turtles;
 var t = new Turtle();
 t.Forward(200);
 ```
+This is when we want to create the turtle explicitly or create more than one turtle.
 
 ## All Turtle Commands:
 - Forward / Backward(distance)   	// receive distance in pixel
