@@ -1,15 +1,29 @@
 Can be installed from NuGet: **ThanaNita.Turtles**
 
-Example:
+# Example
 
 <img width="418" height="423" alt="image" src="https://github.com/user-attachments/assets/d8f37009-47a5-4883-87db-17ddc2f6b6be" />
 
-Example Code:
+## Example Code:
+Short form:
+```
+using static ThanaNita.Turtles.One;
+
+Speed = 800;
+PenColor = Color.Blue;
+for (int i = 0; i < 20; ++i)
+{
+    Forward(200);
+    TurnRight(88);
+}
+Fill(Color.Yellow);
+```
+
+Long form:
 ```
 using static ThanaNita.Turtles.One;
 
 namespace TurtleTest2;
-
 internal static class Program
 {
     static void Main()
@@ -25,22 +39,8 @@ internal static class Program
     }
 }
 ```
-
-Or, in short form:
-```
-using static ThanaNita.Turtles.One;
-
-Speed = 800;
-PenColor = Color.Blue;
-for (int i = 0; i < 20; ++i)
-{
-    Forward(200);
-    TurnRight(88);
-}
-Fill(Color.Yellow);
-```
-
-## Classes:
+# Documentation
+## Classes
 ### One
 A static class containing a default turtle (using lazy creation)
 ### Turtle
@@ -73,7 +73,8 @@ t.Forward(200);
 ```
 This is when we want to create the turtle explicitly or create more than one turtle.
 
-## All Turtle Commands:
+# Turtle Commands & Properties
+## Turtle Commands:
 - Forward / Backward(distance)   	// receive distance in pixel
 - TurnLeft / TurnRight(angle)      	// receive angle in degree
 - ArcLeft / ArcRight(radius, angle)	// radius in pixel, angle in degree
@@ -86,7 +87,7 @@ This is when we want to create the turtle explicitly or create more than one tur
 - SetPenSize(size)
 - HideTurtle() / ShowTurtle()
 
-## All Turtle Properties:
+## Turtle Properties:
 - Position
 - Direction
 - PenOn
@@ -95,8 +96,8 @@ This is when we want to create the turtle explicitly or create more than one tur
 - PenSize
 - Visible
 
-## A Note on "Fill" command:
-- A path was memorized while using Forward/Backward/ArcLeft/ArcRight
+## A Note on the "Fill" command:
+- A path was memorized while using Forward/Backward/ArcLeft/ArcRight.
 - That memorized path will be used when the "Fill" command was called.
 - The path lines will be auto redrawn again after the fill occur.
 - The path will be auto-reset when:
