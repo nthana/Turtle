@@ -42,10 +42,10 @@ internal static class Program
 # Documentation
 ## Classes
 ### One
-A static class containing a default turtle (using lazy creation)
+A static class containing a default turtle (using lazy creation). Normally you will use the default turtle from this class.
 ### Turtle
 The essential class. Can be used to instantiate more than one turtle.
-Normally, will be used indirectly from the One class.
+Normally, will be called indirectly from the One class.
 ### Display
 A window form created automatically when the first turtle was created.
 
@@ -87,14 +87,16 @@ This is when we want to create the turtle explicitly or create more than one tur
 - SetPenSize(size)
 - HideTurtle() / ShowTurtle()
 
+Note: The turtle commands which have animations are: Forward, Backward, TurnLeft, TurnRight, ArcLeft, ArcRight.
+
 ## Turtle Properties:
-- Position
-- Direction
-- PenOn
-- Speed
-- PenColor
-- PenSize
-- Visible
+- Position : Vector2    // (x, y) in pixel unit; use  normal geometric coordinate (x point to right, y point to up)
+- Direction : float     // angle in degree, counter clockwise from X-Axis (right = 0, up = 90, left = 180, down = 270)
+- PenOn : bool          // draw or not draw when the turtle moved
+- Speed : float         // speed in pixels/second
+- PenColor : Color
+- PenSize : float       // pen diameter in pixels
+- Visible : bool        // show or hide the turtle image
 
 ## A Note on the "Fill" command:
 - A path was memorized while using Forward/Backward/ArcLeft/ArcRight.
@@ -104,3 +106,9 @@ This is when we want to create the turtle explicitly or create more than one tur
     1. pen size was changed.
     2. pen color was changed.
 (To make the behavior the same as PencilCode. And it's easier to implement.)
+
+# Implementation Note
+There are 2 threads, the program.cs thread and the UI thread.
+- When the program call turtle command for the first time, the UI Thread will be created (in Display.cs).
+- The turtle commands that have animations will block the program.cs thread until the UI Thread finished the animation.
+  - The AutoResetEvent class is used for managing the blocking thread.
