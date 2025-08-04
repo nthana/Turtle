@@ -33,8 +33,8 @@ internal class Arc : Command
             radius = -radius;
             turnLeft = !turnLeft;
         }
-        if (radius == 0)
-            throw new Exception("Arc cannot have zero radius (radius = 0).");
+        //if (radius == 0)
+        //    throw new Exception("Arc cannot have zero radius (radius = 0).");
 
         this.turtle = turtle;
         this.turnLeft = turnLeft;
@@ -76,7 +76,7 @@ internal class Arc : Command
         float interpolation = endTime != 0 ? (accumTime / endTime) : 1;
         direction = startAngle + displacement * interpolation;
 
-        if (turtle.PenOn)
+        if (turtle.PenOn && IsValidRect())
         {
             var pen = PenCache.Get(turtle.PenColor, turtle.PenSize);
             myBuffer.Graphics.DrawArc(pen, rect, turtle.Direction - 90 * Sign(), direction - turtle.Direction);
@@ -97,6 +97,8 @@ internal class Arc : Command
 
         return IsFinished();
     }
+
+    private bool IsValidRect() => rect.Width > 0 && rect.Height > 0;
 
     public bool IsFinished()
     {

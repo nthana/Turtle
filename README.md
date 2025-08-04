@@ -1,4 +1,4 @@
-Can be installed from NuGet: **ThanaNita.Turtles**
+NuGet: https://www.nuget.org/packages/ThanaNita.Turtles
 
 # Example
 

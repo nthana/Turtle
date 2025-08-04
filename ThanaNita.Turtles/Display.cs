@@ -52,6 +52,9 @@ public partial class Display : Form
     {
         InitializeComponent();
 
+        if (!DisplayCreationOptions.CaptionVisible)
+            FormBorderStyle = FormBorderStyle.None;
+        Size = DisplayCreationOptions.WindowSize;
         center = new Vector2(ClientSize.Width / 2, ClientSize.Height / 2);
 
         this.DoubleBuffered = true;
@@ -78,12 +81,22 @@ public partial class Display : Form
         if (Screen.PrimaryScreen == null)
             return;
 
-        int halfWidth = Screen.PrimaryScreen.Bounds.Size.Width / 2;
+        if (DisplayCreationOptions.RightHandSizeCentered)
+        {
+            int halfWidth = Screen.PrimaryScreen.Bounds.Size.Width / 2;
 
-        this.Location = new Point(
-            halfWidth + (halfWidth - this.Size.Width) / 2,
-            (Screen.PrimaryScreen.Bounds.Size.Height - this.Size.Height) / 2
-            );
+            this.Location = new Point(
+                halfWidth + (halfWidth - this.Size.Width) / 2,
+                (Screen.PrimaryScreen.Bounds.Size.Height - this.Size.Height) / 2
+                );
+        }
+        else
+        {
+            this.Location = new Point(
+                (Screen.PrimaryScreen.Bounds.Size.Width - this.Size.Width) / 2,
+                (Screen.PrimaryScreen.Bounds.Size.Height - this.Size.Height) / 2
+                );
+        }
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
@@ -113,9 +126,10 @@ public partial class Display : Form
 
         buffer.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
-        buffer.Graphics.Clear(Color.White);
+        buffer.Graphics.Clear(DisplayCreationOptions.ClearColor);
 
-        DrawGrid(buffer.Graphics, center);
+        if(DisplayCreationOptions.GridVisible)
+            DrawGrid(buffer.Graphics, center);
         TransformToCenter(buffer.Graphics, center);
 
         return buffer;
