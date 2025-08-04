@@ -11,6 +11,9 @@ public partial class Display : Form
 {
     private System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
     private Stopwatch watch = new Stopwatch();
+    private float timeAccum = 0.0f;
+    private float refreshInterval = 1f / 60; // second
+    private int timerInterval = 1; // millisec.
 
     private ManualResetEvent startedEvent = new ManualResetEvent(false);
     private AutoResetEvent finishCommandEvent = new AutoResetEvent(false);
@@ -59,7 +62,7 @@ public partial class Display : Form
 
         this.DoubleBuffered = true;
 
-        timer.Interval = 1000 / 60;
+        timer.Interval = timerInterval;
         timer.Tick += Timer_Tick;
         timer.Enabled = true;
         watch.Start();
@@ -103,6 +106,7 @@ public partial class Display : Form
     {
         float deltaTime = (float)watch.Elapsed.TotalSeconds;
         watch.Restart();
+        timeAccum += deltaTime;
 
         if (command != null)
         {
@@ -111,7 +115,11 @@ public partial class Display : Form
                 FinishedCommand();
         }
 
-        Refresh();
+        if (timeAccum >= refreshInterval)
+        {
+            Refresh();
+            timeAccum -= refreshInterval;
+        }
     }
     private BufferedGraphics CreateBuf()
     {
