@@ -16,37 +16,53 @@ public partial class Display : Form
     private int timerInterval = 1; // millisec.
 
     private ManualResetEvent startedEvent = new ManualResetEvent(false);
-    private AutoResetEvent finishCommandEvent = new AutoResetEvent(false);
-    private Command? command = null;
+//    private AutoResetEvent? finishCommandEvent = null; // = new AutoResetEvent(false);
+//    private Command? command = null;
     private BufferedGraphics myBuffer;
     private Image turtleImage;
     Vector2 center;
 
     private List<Turtle> Turtles = new();
-    public void AddTurtle(Turtle turtle)
+    internal void AddTurtle(Turtle turtle)
     {
         Turtles.Add(turtle);
     }
-    public void WaitForStart()
+    private void WaitForStart()
     {
         startedEvent.WaitOne();
     }
 
+    private struct CommandAndEvent
+    {
+        public Command Command;
+        public ManualResetEvent? FinishCommandEvent;
+    }
+    private Queue<CommandAndEvent> queue = new ();
+    private Mutex mutex = new ();
+
     // called from other thread
     public void QueueAndWait(Command command)
     {
-        if (this.command != null)
+/*        if (this.command != null)
             throw new Exception("reassign command while not finished old command.");
-        this.command = command;
+        this.command = command;*/
+        var finishCommandEvent = PerThread.finishCommandEvent;
+
+        mutex.WaitOne();
+        queue.Enqueue(new CommandAndEvent { Command = command, FinishCommandEvent = PerThread.finishCommandEvent });
+        mutex.ReleaseMutex();
+        // <-- if task switching occur at this point, may have dead lock. (if use AutoResetEvent)
         finishCommandEvent.WaitOne();
+        finishCommandEvent.Reset(); // use manual reset; to prevent dead lock.
     }
 
     // called from this thread (UI Thread)
-    private void FinishedCommand()
+/*    private void FinishedCommand()
     {
         this.command = null; // reference assignment is atomic in C#
-        finishCommandEvent.Set();
-    }
+        finishCommandEvent!.Set();
+        //finishCommandEvent = null;
+    }*/
     /*private Command? CheckCommand()
     {
         return command;
@@ -108,12 +124,18 @@ public partial class Display : Form
         watch.Restart();
         timeAccum += deltaTime;
 
-        if (command != null)
+        mutex.WaitOne();
+        int count = queue.Count;
+        for (int i = 0; i < count; i++)
         {
-            command.Act(deltaTime, myBuffer);
-            if (command.IsFinished())
-                FinishedCommand();
+            var data = queue.Dequeue();
+            data.Command.Act(deltaTime, myBuffer);
+            if (data.Command.IsFinished())
+                data.FinishCommandEvent?.Set();
+            else
+                queue.Enqueue(data);
         }
+        mutex.ReleaseMutex();
 
         if (timeAccum >= refreshInterval)
         {
