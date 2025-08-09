@@ -48,6 +48,10 @@ The essential class. Can be used to instantiate more than one turtle.
 Normally, will be called indirectly from the One class.
 ### Display
 A window form created automatically when the first turtle was created.
+### DisplayCreationOptions
+A static class to set the creation options for the Display Window.
+It has static properties: e.g. WindowSize, GridVisible, ClearColor.
+The options should be set before calling the first turtle command (before the display screen was created).
 
 ## Usages
 There are three different ways to use this package.
