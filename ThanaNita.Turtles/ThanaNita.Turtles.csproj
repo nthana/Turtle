@@ -9,13 +9,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>0.8.7</Version>
+    <Version>0.8.8</Version>
     <Authors>Thana Nitayarerk</Authors>
     <Description>Turtle Graphics for .Net, implemented using Windows Forms and GDI+. This aims to use in education to learn C# with fun.</Description>
     <Title>Turtle Graphics for .Net (by Thana)</Title>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageTags>Turtle, Graphics, Windows Forms, GDI+</PackageTags>
-    <PackageReleaseNotes>Separate processing interval and draw interval.</PackageReleaseNotes>
+    <PackageReleaseNotes>Update the readme document</PackageReleaseNotes>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright (c) Thana Nitayarerk 2025</Copyright>
     <RepositoryUrl>https://github.com/nthana/Turtle</RepositoryUrl>

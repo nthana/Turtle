@@ -1,10 +1,11 @@
 NuGet: https://www.nuget.org/packages/ThanaNita.Turtles
 
-# Example
+# Examples
+## Example 1: Overlap Rectangles
 
 ![Overlap Rects](https://github.com/nthana/Turtle/blob/master/ThanaNita.Turtles/Docs/Images/overlapRects.png)
 
-## Example Code:
+### Example Code:
 Short form:
 ```
 using static ThanaNita.Turtles.One;
@@ -39,6 +40,42 @@ internal static class Program
     }
 }
 ```
+## Example 2: A Flower
+![Flower](https://github.com/nthana/Turtle/blob/master/ThanaNita.Turtles/Docs/Images/flower.png)
+```
+using static ThanaNita.Turtles.One;
+
+internal static class Program
+{
+    static void Main()
+    {
+        DrawFlower();
+    }
+
+    static void DrawFlower()
+    {
+        SetSpeed(800);
+        SetPenSize(5);
+        int count = 8;
+        float angle = 360.0f / count;
+        for (int i = 0; i < count; ++i)
+        {
+            DrawPetal();
+            TurnRight(angle);
+        }
+        Fill(Color.Pink);
+        HideTurtle();
+    }
+    static void DrawPetal()
+    {
+        ArcRight(200, 90);
+        TurnRight(90);
+        ArcRight(200, 90);
+        TurnRight(90);
+    }
+}
+```
+
 # Documentation
 ## Classes
 ### One
