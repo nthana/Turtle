@@ -46,10 +46,10 @@ public partial class Display : Form
 /*        if (this.command != null)
             throw new Exception("reassign command while not finished old command.");
         this.command = command;*/
-        var finishCommandEvent = PerThread.finishCommandEvent;
+        var finishCommandEvent = PerThread.FinishCommandEvent;
 
         mutex.WaitOne();
-        queue.Enqueue(new CommandAndEvent { Command = command, FinishCommandEvent = PerThread.finishCommandEvent });
+        queue.Enqueue(new CommandAndEvent { Command = command, FinishCommandEvent = finishCommandEvent });
         mutex.ReleaseMutex();
         // <-- if task switching occur at this point, may have dead lock. (if use AutoResetEvent)
         finishCommandEvent.WaitOne();

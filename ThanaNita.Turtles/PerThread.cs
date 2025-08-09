@@ -9,6 +9,15 @@ namespace ThanaNita.Turtles
     internal static class PerThread
     {
         [ThreadStatic]
-        public static ManualResetEvent finishCommandEvent = new ManualResetEvent(false);
+        private static ManualResetEvent? finishCommandEvent;
+
+        public static ManualResetEvent FinishCommandEvent
+        {
+            get
+            {
+                finishCommandEvent ??= new ManualResetEvent(false);
+                return finishCommandEvent;
+            }
+        }
     }
 }
