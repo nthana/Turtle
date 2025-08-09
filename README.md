@@ -3,7 +3,7 @@ NuGet: https://www.nuget.org/packages/ThanaNita.Turtles
 # Examples
 ## Example 1: Overlap Rectangles
 
-![Overlap Rects](https://github.com/nthana/Turtle/blob/master/ThanaNita.Turtles/Docs/Images/overlapRects.png)
+![Overlap Rects](https://raw.githubusercontent.com/nthana/Turtle/refs/heads/master/ThanaNita.Turtles/Docs/Images/overlapRects.png)
 
 ### Example Code:
 Short form:
@@ -41,7 +41,7 @@ internal static class Program
 }
 ```
 ## Example 2: A Flower
-![Flower](https://github.com/nthana/Turtle/blob/master/ThanaNita.Turtles/Docs/Images/flower.png)
+![Flower](https://raw.githubusercontent.com/nthana/Turtle/refs/heads/master/ThanaNita.Turtles/Docs/Images/flower.png)
 ```
 using static ThanaNita.Turtles.One;
 
